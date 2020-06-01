@@ -6,6 +6,10 @@ class Login extends BaseController
 {
 	public function admin()
 	{
+		if ($this->session->get('role')) {
+			return redirect()->to('/dashboard');
+		}
+
 		$data = [
 			'title' => 'Selamat Datang di Aplikasi PDPS'
 		];
@@ -17,6 +21,10 @@ class Login extends BaseController
 
 	public function employe()
 	{
+		if ($this->session->get('role')) {
+			return redirect()->to('/dashboard');
+		}
+
 		$data = [
 			'title' => 'Selamat Datang di Aplikasi PDPS'
 		];

@@ -4,7 +4,7 @@ $(document).ready(function () {
     }, 800);
 
     $.ajax({
-        url: "./get-domisili-perusahaan",
+        url: "./get-kematian",
         dataType: "JSON",
         success: function (data) {
             loadData(data)
@@ -18,7 +18,9 @@ $(document).ready(function () {
 function loadData(data) {
     var html = '';
     html += `
-            <table id="zero-config" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+            <table table table id = "data-table"
+            class = "table table-striped dt-responsive nowrap"
+            style = "width:100%" >
                 <thead>
                     <tr>
                         <th>#</th>
@@ -26,14 +28,12 @@ function loadData(data) {
                         <th>No Surat</th>
                         <th>NIK</th>
                         <th>Nama</th>
-                        <th>Perusahaan</th>
-                        <th>Alamat</th>
-                        <th>Bidang</th>
-                        <th>Status Bangunan</th>
-                        <th>Penanggung Jawab</th>
-                        <th>Pendirian</th>
+                        <th>Jam</th>
+                        <th>Hari</th>
+                        <th>Lokasi</th>
+                        <th>Penyebab</th>
+                        <th>Tanggal</th>
                         <th>Tanggal Surat</th>
-                        <th>Masa Berlaku</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -46,16 +46,14 @@ function loadData(data) {
                     <td>` + data[i].no_surat + `</td>
                     <td>` + data[i].nik + `</td>
                     <td>` + data[i].nama + `</td>
-                    <td>` + data[i].nama_perusahaan + `</td>
-                    <td>` + data[i].alamat_perusahaan + `</td>
-                    <td>` + data[i].bidang + `</td>
-                    <td>` + data[i].status_bangunan + `</td>
-                    <td>` + data[i].penanggung + `</td>
-                    <td>` + data[i].pendirian + `</td>
+                    <td>` + data[i].jam + `</td>
+                    <td>` + data[i].hari + `</td>
+                    <td>` + data[i].lokasi + `</td>
+                    <td>` + data[i].penyebab + `</td>
+                    <td>` + data[i].tanggal + `</td>
                     <td>` + data[i].tanggal_surat + `</td>
-                    <td>` + data[i].masa_berlaku + `</td>
                     <td>                        
-                        <button type="button" class="btn btn-warning btn-sm" data-id="` + data[i].id + `">Cetak Surat</button>
+                        <button type="button" class="btn btn-warning btn-sm" data-id="">Cetak Surat</button>
                     </td>
                 </tr>`;
     }
@@ -63,28 +61,16 @@ function loadData(data) {
             </table>`;
     $('#table-report').html(html);
 
-    $('#zero-config').DataTable({
+    $('#data-table').DataTable({
         dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
         buttons: {
             buttons: [{
                 extend: 'excel',
-                title: 'Data Laporan Surat Domisili Perusahaan',
+                title: 'Data Laporan Surat Kematian',
                 className: 'btn'
             }]
         },
         "info": false,
-        responsive: {
-            details: {
-                display: $.fn.dataTable.Responsive.display.modal({
-                    header: function (row) {
-                        return 'Detail Surat Domisili';
-                    }
-                }),
-                renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-                    tableClass: 'table'
-                })
-            }
-        },
         "oLanguage": {
             "oPaginate": {
                 "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
@@ -109,7 +95,7 @@ $('form[id=formFilter]').submit(function () {
 
     $.ajax({
         type: "POST",
-        url: "./get-domisili-perusahaan",
+        url: "./get-kematian",
         data: date,
         dataType: "JSON",
         success: function (data) {

@@ -72,7 +72,7 @@
                     </li>
 
                     <li class="menu">
-                        <a href="#elements" data-toggle="collapse" aria-expanded="false" class="menus dropdown-toggle">
+                        <a href="#suratSub" id="suratMain" data-toggle="collapse" aria-expanded="false" class="menus dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512.042 512.042" style="enable-background:new 0 0 512.042 512.042;" xml:space="preserve" width="512px" height="512px">
                                     <g>
@@ -95,18 +95,30 @@
                                 </svg>
                             </div>
                         </a>
-                        <ul class="collapse submenu list-unstyled" id="elements" data-parent="#accordionExample">
-                            <li>
-                                <a href="element_alerts.html"> Alerts </a>
+                        <ul class="collapse submenu list-unstyled" id="suratSub" data-parent="#accordionExample">
+                            <li class="surat-active" id="perusahaan">
+                                <a href="javascript:;"> Domisili Perusahaan </a>
                             </li>
-                            <li>
-                                <a href="element_avatar.html"> Avatar </a>
+                            <li class="surat-active" id="usaha">
+                                <a href="javascript:;"> Domisili Usaha </a>
+                            </li>
+                            <li class="surat-active" id="warga">
+                                <a href="javascript:;"> Domisili Warga </a>
+                            </li>
+                            <li class="surat-active" id="kematian">
+                                <a href="javascript:;"> Kematian </a>
+                            </li>
+                            <li class="surat-active" id="pindah">
+                                <a href="javascript:;"> Pindah </a>
+                            </li>
+                            <li class="surat-active" id="sktm">
+                                <a href="javascript:;"> SKTM </a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="menu">
-                        <a href="#report" data-toggle="collapse" aria-expanded="false" class="menus dropdown-toggle collapsed">
+                        <a href="#reportSub" id="report" data-toggle="collapse" aria-expanded="false" class="menus dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="512px" viewBox="0 0 496 496" width="512px" class="">
                                     <g>
@@ -131,15 +143,24 @@
                                 </svg>
                             </div>
                         </a>
-                        <ul class="collapse submenu list-unstyled" id="report" data-parent="#accordionExample">
-                            <li id="subMenu">
-                                <a href="javascript:;" id="perusahaan" class="report"> Domisili Perusahaan </a>
+                        <ul class="collapse submenu list-unstyled" id="reportSub" data-parent="#accordionExample">
+                            <li class="report-active" id="perusahaan">
+                                <a href="javascript:;"> Domisili Perusahaan </a>
                             </li>
-                            <li id="subMenu">
-                                <a href="javascript:;" id="usaha" class="report"> Domisili Usaha </a>
+                            <li class="report-active" id="usaha">
+                                <a href="javascript:;"> Domisili Usaha </a>
                             </li>
-                            <li id="subMenu">
-                                <a href="javascript:;" id="warga" class="report"> Domisili Warga </a>
+                            <li class="report-active" id="warga">
+                                <a href="javascript:;"> Domisili Warga </a>
+                            </li>
+                            <li class="report-active" id="kematian">
+                                <a href="javascript:;"> Kematian </a>
+                            </li>
+                            <li class="report-active" id="pindah">
+                                <a href="javascript:;"> Pindah </a>
+                            </li>
+                            <li class="report-active" id="sktm">
+                                <a href="javascript:;"> SKTM </a>
                             </li>
                         </ul>
                     </li>

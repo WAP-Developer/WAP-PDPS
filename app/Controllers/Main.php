@@ -256,10 +256,6 @@ class Main extends BaseController
     }
 
     // ========================================================
-    // end Penduduk
-    // ========================================================
-
-    // ========================================================
     // Pegawai
     // ========================================================
     public function employe()
@@ -315,8 +311,48 @@ class Main extends BaseController
     }
 
     // ========================================================
-    // end Employe
+    // Surat
     // ========================================================
+
+    public function getDataNik()
+    {
+        $nik = $this->request->getPost('nik');
+
+        $anggotakk = $this->anggota->where('nik', $nik)->first();
+        $anggotaId = $anggotakk['kk_id'];
+
+        if ($anggotakk['kk_id'] != "") {
+            $fetchData = $this->db->query("SELECT a.*, b.nokk, b.kepalakk FROM anggota_kk a, kk b WHERE a.kk_id=b.id AND a.kk_id=$anggotaId");
+            echo json_encode($fetchData->getResultArray());
+        } else {
+            echo json_encode('');
+        }
+    }
+
+    public function suratPerusahaan()
+    {
+        echo view('admin/surat/perusahaan');
+    }
+
+    public function suratUsaha()
+    {
+        echo view('admin/surat/usaha');
+    }
+
+    public function suratWarga()
+    {
+        echo view('admin/surat/warga');
+    }
+
+    public function suratKematian()
+    {
+        echo view('admin/surat/kematian');
+    }
+
+    public function suratSktm()
+    {
+        echo view('admin/surat/sktm');
+    }
 
     // ========================================================
     // Report
@@ -333,23 +369,89 @@ class Main extends BaseController
 
         if ($tanggal == "") {
             $check = $this->report->getDomisiliPerusahaan();
+        } else if (strlen($tanggal) == 10) {
+            $check = $this->report->getDomisiliPerusahaanFilerSingle($tanggal);
         } else {
-            $check = $this->report->getDomisiliPerusahaanFiler(substr($tanggal, 0, 10), substr($tanggal, 14));
+            $check = $this->report->getDomisiliPerusahaanFilerRange(substr($tanggal, 0, 10), substr($tanggal, 14));
         }
         echo json_encode($check);
     }
 
-    public function getDomisiliPerusahaanID()
+    public function domisiliUsaha()
     {
-        $id = $this->request->getPost('id');
+        echo view('admin/report/domisiliUsaha');
+    }
 
-        $check = $this->report->getDomisiliPerusahaanByID($id);
+    public function getDomisiliUsaha()
+    {
+        $tanggal = $this->request->getPost('date');
+
+        if ($tanggal == "") {
+            $check = $this->report->getDomisiliUsaha();
+        } else if (strlen($tanggal) == 10) {
+            $check = $this->report->getDomisiliUsahaFilerSingle($tanggal);
+        } else {
+            $check = $this->report->getDomisiliUsahaFilerRange(substr($tanggal, 0, 10), substr($tanggal, 14));
+        }
         echo json_encode($check);
     }
 
-    // ========================================================
-    // end Report
-    // ========================================================
+    public function domisiliWarga()
+    {
+        echo view('admin/report/domisiliWarga');
+    }
+
+    public function getDomisiliWarga()
+    {
+        $tanggal = $this->request->getPost('date');
+
+        if ($tanggal == "") {
+            $check = $this->report->getDomisiliWarga();
+        } else if (strlen($tanggal) == 10) {
+            $check = $this->report->getDomisiliWargaFilerSingle($tanggal);
+        } else {
+            $check = $this->report->getDomisiliWargaFilerRange(substr($tanggal, 0, 10), substr($tanggal, 14));
+        }
+        echo json_encode($check);
+    }
+
+    public function kematian()
+    {
+        echo view('admin/report/kematian');
+    }
+
+    public function getKematian()
+    {
+        $tanggal = $this->request->getPost('date');
+
+        if ($tanggal == "") {
+            $check = $this->report->getKematian();
+        } else if (strlen($tanggal) == 10) {
+            $check = $this->report->getKematianFilerSingle($tanggal);
+        } else {
+            $check = $this->report->getKematianFilerRange(substr($tanggal, 0, 10), substr($tanggal, 14));
+        }
+        echo json_encode($check);
+    }
+
+    public function sktm()
+    {
+        echo view('admin/report/sktm');
+    }
+
+    public function getSktm()
+    {
+        $tanggal = $this->request->getPost('date');
+
+        if ($tanggal == "") {
+            $check = $this->report->getSktm();
+        } else if (strlen($tanggal) == 10) {
+            $check = $this->report->getSktmFilerSingle($tanggal);
+        } else {
+            $check = $this->report->getSktmFilerRange(substr($tanggal, 0, 10), substr($tanggal, 14));
+        }
+        echo json_encode($check);
+    }
 
     // ========================================================
     // Logout

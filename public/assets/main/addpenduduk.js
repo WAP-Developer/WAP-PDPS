@@ -219,7 +219,6 @@ function loadPenduduk() {
 
 // btn Delete
 function btnDelete(id) {
-    var id = $('.btn-delete').attr('id');
     swal({
         title: 'Anda Yakin ?',
         text: "Apakah anda yakin ingin menghapus anggota",
@@ -251,7 +250,6 @@ function btnDelete(id) {
 
 // btn Update
 function btnUpdate(id) {
-    var id = $('.btn-update').attr('id');
     $.ajax({
         type: "POST",
         url: "./fetch-edit-anggota",

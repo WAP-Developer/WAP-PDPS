@@ -59,13 +59,36 @@ $routes->post('/fetchanggota/', 'Main::fetchAnggota');
 // Karyawan
 // ====================================
 $routes->get('/employe/', 'Main::employe');
-$routes->get('/report-perusahaan/', 'Main::domisiliPerusahaan');
-$routes->get('/get-domisili-perusahaan/', 'Main::getDomisiliPerusahaan');
-$routes->post('/get-domisili-perusahaan/', 'Main::getDomisiliPerusahaan');
-$routes->post('/get-domisili-perusahaanid/', 'Main::getDomisiliPerusahaanID');
 $routes->post('/employe/', 'Main::addEmploye');
 $routes->post('/reset-employe/', 'Main::resetEmploye');
 $routes->post('/delete-employe/', 'Main::deleteEmploye');
+
+// Surat
+// =====================================
+$routes->post('/get-data-bynik/', 'Main::getDataNik');
+$routes->get('/surat-perusahaan/', 'Main::suratPerusahaan');
+$routes->get('/surat-usaha/', 'Main::suratUsaha');
+$routes->get('/surat-warga/', 'Main::suratWarga');
+$routes->get('/surat-kematian/', 'Main::suratKematian');
+$routes->get('/surat-sktm/', 'Main::suratSktm');
+
+// Report
+// =====================================
+$routes->get('/report-perusahaan/', 'Main::domisiliPerusahaan');
+$routes->get('/report-usaha/', 'Main::domisiliUsaha');
+$routes->get('/report-warga/', 'Main::domisiliWarga');
+$routes->get('/report-kematian/', 'Main::kematian');
+$routes->get('/report-sktm/', 'Main::sktm');
+$routes->get('/get-domisili-perusahaan/', 'Main::getDomisiliPerusahaan');
+$routes->get('/get-domisili-usaha/', 'Main::getDomisiliUsaha');
+$routes->get('/get-domisili-warga/', 'Main::getDomisiliWarga');
+$routes->get('/get-kematian/', 'Main::getKematian');
+$routes->get('/get-sktm/', 'Main::getSktm');
+$routes->post('/get-domisili-perusahaan/', 'Main::getDomisiliPerusahaan');
+$routes->post('/get-domisili-usaha/', 'Main::getDomisiliUsaha');
+$routes->post('/get-domisili-warga/', 'Main::getDomisiliWarga');
+$routes->post('/get-kematian/', 'Main::getKematian');
+$routes->post('/get-sktm/', 'Main::getSktm');
 
 
 // Account

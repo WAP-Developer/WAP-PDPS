@@ -65,4 +65,4 @@
             mode: "range"
         });
     </script>
-    <script src="<?= base_url('assets/main/report'); ?>/domisiliPerusahaan.js"></script>
+    <script src="<?= base_url('assets/main/report'); ?>/kematian.js"></script>
