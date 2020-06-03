@@ -56,7 +56,7 @@ $("form[id='formAddEmploye']").submit(function () {
 
     $.ajax({
         type: "POST",
-        url: './employe',
+        url: './main/addEmploye',
         data: dataEmploye,
         success: function (data) {
             if (data == 'success') {
@@ -66,7 +66,7 @@ $("form[id='formAddEmploye']").submit(function () {
                     'success'
                 );
                 $('#title-navbar').html("Karyawan");
-                $('.body-switch').load('./employe');
+                $('.body-switch').load('./main/employe');
             } else {
                 swal({
                     title: 'Gagal!',
@@ -97,19 +97,19 @@ $('.btn-reset').click(function () {
         if (result.value) {
             swal(
                 'Berhasil!',
-                'Data Berhasil Dihapus.',
+                'Kata Sandi Berhasil di Setel Ulang.',
                 'success'
             );
 
             $.ajax({
                 type: "POST",
-                url: "./reset-employe",
+                url: "./main/resetEmploye",
                 data: {
                     id: id
                 },
                 success: function (data) {
                     $('#title-navbar').html("Karyawan");
-                    $('.body-switch').load('./employe');
+                    $('.body-switch').load('./main/employe');
                 }
             });
         }
@@ -134,13 +134,13 @@ $('.btn-delete').click(function () {
         if (result.value) {
             $.ajax({
                 type: "POST",
-                url: "./delete-employe",
+                url: "./main/deleteEmploye",
                 data: {
                     id: id
                 },
                 success: function (data) {
                     $('#title-navbar').html("Karyawan");
-                    $('.body-switch').load('./employe');
+                    $('.body-switch').load('./main/employe');
                     swal(
                         'Berhasil!',
                         'Data Berhasil Dihapus.',

@@ -23,7 +23,7 @@ $('#zero-config').DataTable({
 
 $('#addPenduduk').click(function () {
     $('#title-navbar').html("Tambah Penduduk");
-    $('.body-switch').load('./add-penduduk', function () {
+    $('.body-switch').load('./main/addPenduduk', function () {
         $.getScript("/assets/admin/plugins/table/datatable/datatables.js");
         $('#daftar-anggota').DataTable({
             "oLanguage": {
@@ -64,13 +64,13 @@ $('.btn-delete').click(function () {
 
             $.ajax({
                 type: "POST",
-                url: "./delete-penduduk",
+                url: "./main/deletePendudukProcess",
                 data: {
                     id: id
                 },
                 success: function (data) {
                     $('#title-navbar').html("Penduduk");
-                    $('.body-switch').load('./penduduk');
+                    $('.body-switch').load('./main/penduduk');
                 }
             });
         }
@@ -80,5 +80,5 @@ $('.btn-delete').click(function () {
 $('.btn-editPenduduk').click(function () {
     var id = $(this).attr('id');
     $('#title-navbar').html("Edit Penduduk");
-    $('.body-switch').load('./edit-penduduk/' + id);
+    $('.body-switch').load('./main/editPenduduk/' + id);
 });

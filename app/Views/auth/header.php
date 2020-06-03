@@ -23,7 +23,7 @@
         <!-- END GLOBAL MANDATORY STYLES -->
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/admin') ?>/assets/css/forms/theme-checkbox-radio.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/admin') ?>/assets/css/forms/switches.css">
-        <link href="<?= base_url('assets'); ?>/main/preloader.css" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url('assets'); ?>/main/css/preloader.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body class="form">

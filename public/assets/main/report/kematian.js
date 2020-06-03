@@ -4,7 +4,7 @@ $(document).ready(function () {
     }, 800);
 
     $.ajax({
-        url: "./get-kematian",
+        url: "./main/getDomisiliWarga",
         dataType: "JSON",
         success: function (data) {
             loadData(data)
@@ -95,7 +95,7 @@ $('form[id=formFilter]').submit(function () {
 
     $.ajax({
         type: "POST",
-        url: "./get-kematian",
+        url: "./main/getDomisiliWarga",
         data: date,
         dataType: "JSON",
         success: function (data) {

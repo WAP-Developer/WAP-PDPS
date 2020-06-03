@@ -4,7 +4,7 @@ $(document).ready(function () {
     }, 800);
 
     $.ajax({
-        url: "./get-sktm",
+        url: "./main/getSktm",
         dataType: "JSON",
         success: function (data) {
             loadData(data)
@@ -83,7 +83,7 @@ $('form[id=formFilter]').submit(function () {
 
     $.ajax({
         type: "POST",
-        url: "./get-sktm",
+        url: "./main/getSktm",
         data: date,
         dataType: "JSON",
         success: function (data) {

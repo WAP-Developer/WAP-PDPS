@@ -8,15 +8,14 @@ class Main extends BaseController
     {
         if (!$this->session->get('name')) {
             $this->session->setFlashdata('notif', '<div class="alert alert-danger mb-4" style="margin-top: -30px;" role="alert">
-														<button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert">
-																<line x1="18" y1="6" x2="6" y2="18"></line>
-																<line x1="6" y1="6" x2="18" y2="18"></line>
-															</svg></button>
-														Anda Belum Login, Silakan Login Dulu. </button>
-													</div>');
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg></button>
+                Anda Belum Login, Silakan Login Dulu. </button>
+            </div>');
             return redirect()->to('/');
         }
-
         $data = [
             'title' => 'Dashboard',
             'name' => $this->session->get('name'),
@@ -182,7 +181,7 @@ class Main extends BaseController
 
     public function editPenduduk()
     {
-        $id = $this->request->uri->getSegment(2);
+        $id = $this->request->uri->getSegment(3);
         $data = [
             'dataPenduduk' => $this->kk->where('id', $id)->first()
         ];
@@ -458,13 +457,14 @@ class Main extends BaseController
     // ========================================================
     public function logout()
     {
-        $this->session->remove('nip');
         $this->session->remove('name');
 
         if ($this->session->get('role') == 'admin') :
-            return redirect()->to(base_url('cp-admin'));
+            $this->session->remove('username');
+            return redirect()->to('/cp-admin');
         else :
-            return redirect()->to(base_url());
+            $this->session->remove('nip');
+            return redirect()->to('/');
         endif;
     }
 }

@@ -99,7 +99,7 @@ function submitData() {
     var datapenduduk = $('#formAddMain').serialize();
     $.ajax({
         type: "POST",
-        url: './add-penduduk',
+        url: './main/addPendudukProcess',
         data: datapenduduk,
         success: function (aksi) {
             if (aksi == 'success') {
@@ -138,7 +138,7 @@ function submitData() {
 
         $.ajax({
             type: "POST",
-            url: './fetchnokk',
+            url: './main/fetchNoKK',
             data: datakk,
             success: function (hasil) {
                 $('#idkk').val(hasil);
@@ -154,7 +154,7 @@ function load_data() {
 
     $.ajax({
         type: "POST",
-        url: "./fetchanggota",
+        url: "./main/fetchAnggota",
         data: loaddata,
         dataType: "JSON",
         success: function (data) {
@@ -191,7 +191,7 @@ $("form[id='formAddAnggota']").submit(function () {
     var dataanggota = $('#formAddAnggota').serialize();
     $.ajax({
         type: "POST",
-        url: './add-anggota',
+        url: './main/addAnggota',
         data: dataanggota,
         success: function (aksi) {
             if (aksi == 'success') {
@@ -214,7 +214,7 @@ $("form[id='formAddAnggota']").submit(function () {
 
 // Load Penduduk
 function loadPenduduk() {
-    $('.body-switch').load('./penduduk');
+    $('.body-switch').load('./main/penduduk');
 }
 
 // btn Delete
@@ -236,7 +236,7 @@ function btnDelete(id) {
 
             $.ajax({
                 type: "POST",
-                url: "./delete-anggota",
+                url: "./main/deleteAnggota",
                 data: {
                     id: id
                 },
@@ -252,7 +252,7 @@ function btnDelete(id) {
 function btnUpdate(id) {
     $.ajax({
         type: "POST",
-        url: "./fetch-edit-anggota",
+        url: "./main/updateAnggota",
         dataType: "JSON",
         data: {
             id: id
@@ -289,7 +289,7 @@ $("form[id='formEditAnggota']").submit(function () {
     var dataEditAnggota = $('#formEditAnggota').serialize();
     $.ajax({
         type: "POST",
-        url: './update-anggota',
+        url: './main/updateAnggotaProccess',
         data: dataEditAnggota,
         success: function (aksi) {
             if (aksi == 'success') {

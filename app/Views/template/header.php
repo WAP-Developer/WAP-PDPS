@@ -25,7 +25,7 @@
 
     <link href="<?= base_url('assets/admin'); ?>/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/admin'); ?>/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url('assets'); ?>/main/preloader.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets'); ?>/main/css/preloader.css" rel="stylesheet" type="text/css" />
 
 </head>
 

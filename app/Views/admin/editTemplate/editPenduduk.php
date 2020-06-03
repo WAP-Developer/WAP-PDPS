@@ -203,7 +203,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="tglkawin">Tanggal Perkawinan</label>
-                                                            <input type="text" class="form-control" id="tglkawin" name="tglkawin" required>
+                                                            <input type="text" class="form-control" id="tglkawin" name="tglkawin" placeholder="Contoh : 24-06-1990" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="hubungan">Hubungan Dalam Keluarga</label>
@@ -233,6 +233,9 @@
                                                             <label for="ibu">Ibu</label>
                                                             <input type="text" class="form-control" id="ibu" name="ibu" required>
                                                         </div>
+                                                        <span><i><b>Catatan </b></i></span><br>
+                                                        <span><i>* Jika Belum Menikah isi dengan (<b>-</b>)</i></span><br>
+                                                        <span><i>* Jika No Paspor & No KITAP tidak ada isi dengan (<b>-</b>)</i></span>
                                                     </div>
                                                 </div>
                                             </div>

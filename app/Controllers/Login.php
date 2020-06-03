@@ -4,24 +4,9 @@ namespace App\Controllers;
 
 class Login extends BaseController
 {
-	public function admin()
+	public function index()
 	{
-		if ($this->session->get('role')) {
-			return redirect()->to('/dashboard');
-		}
-
-		$data = [
-			'title' => 'Selamat Datang di Aplikasi PDPS'
-		];
-
-		echo view('auth/header', $data);
-		echo view('auth/admin');
-		echo view('auth/footer');
-	}
-
-	public function employe()
-	{
-		if ($this->session->get('role')) {
+		if ($this->session->get('name')) {
 			return redirect()->to('/dashboard');
 		}
 
@@ -31,6 +16,21 @@ class Login extends BaseController
 
 		echo view('auth/header', $data);
 		echo view('auth/employe');
+		echo view('auth/footer');
+	}
+
+	public function admin()
+	{
+		if ($this->session->get('name')) {
+			return redirect()->to('/dashboard');
+		}
+
+		$data = [
+			'title' => 'Selamat Datang di Aplikasi PDPS'
+		];
+
+		echo view('auth/header', $data);
+		echo view('auth/admin');
 		echo view('auth/footer');
 	}
 

@@ -22,7 +22,7 @@ $(document).ready(function () {
         var table = $(this).data('column');
         var value = $(this).text();
         $.ajax({
-            url: "./update-penduduk",
+            url: "./main/updatePenduduk",
             method: "POST",
             data: {
                 id: id,
@@ -38,7 +38,7 @@ $(document).ready(function () {
 
     $('#selesai').click(function () {
         $('#title-navbar').html("Penduduk");
-        $('.body-switch').load('./penduduk');
+        $('.body-switch').load('./main/penduduk');
     });
 });
 
@@ -49,7 +49,7 @@ function load_data() {
 
     $.ajax({
         type: "POST",
-        url: "./fetchanggota",
+        url: "./main/fetchAnggota",
         data: loaddata,
         dataType: "JSON",
         success: function (data) {
@@ -76,7 +76,7 @@ $("form[id='formAddAnggota']").submit(function () {
     var dataanggota = $('#formAddAnggota').serialize();
     $.ajax({
         type: "POST",
-        url: './add-anggota',
+        url: './main/addAnggota',
         data: dataanggota,
         success: function (aksi) {
             console.log(aksi)
@@ -101,7 +101,7 @@ $("form[id='formAddAnggota']").submit(function () {
 function btnUpdate(id) {
     $.ajax({
         type: "POST",
-        url: "./fetch-edit-anggota",
+        url: "./main/updateAnggota",
         dataType: "JSON",
         data: {
             id: id
@@ -138,7 +138,7 @@ $("form[id='formEditAnggota']").submit(function () {
     var dataEditAnggota = $('#formEditAnggota').serialize();
     $.ajax({
         type: "POST",
-        url: './update-anggota',
+        url: './main/updateAnggotaProccess',
         data: dataEditAnggota,
         success: function (aksi) {
             if (aksi == 'success') {
@@ -173,7 +173,7 @@ function btnDelete(id) {
 
             $.ajax({
                 type: "POST",
-                url: "./delete-anggota",
+                url: "./main/deleteAnggota",
                 data: {
                     id: id
                 },

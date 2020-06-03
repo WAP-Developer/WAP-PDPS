@@ -4,7 +4,7 @@ $(document).ready(function () {
     }, 800);
 
     $.ajax({
-        url: "./get-domisili-warga",
+        url: "./main/getDomisiliWarga",
         dataType: "JSON",
         success: function (data) {
             loadData(data)
@@ -85,7 +85,7 @@ $('form[id=formFilter]').submit(function () {
 
     $.ajax({
         type: "POST",
-        url: "./get-domisili-warga",
+        url: "./main/getDomisiliWarga",
         data: date,
         dataType: "JSON",
         success: function (data) {

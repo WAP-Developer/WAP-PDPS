@@ -4,7 +4,7 @@ $(document).ready(function () {
     }, 800);
 
     $.ajax({
-        url: "./get-domisili-perusahaan",
+        url: "./main/getDomisiliPerusahaan",
         dataType: "JSON",
         success: function (data) {
             loadData(data)
@@ -97,7 +97,7 @@ $('form[id=formFilter]').submit(function () {
 
     $.ajax({
         type: "POST",
-        url: "./get-domisili-perusahaan",
+        url: "./main/getDomisiliPerusahaan",
         data: date,
         dataType: "JSON",
         success: function (data) {

@@ -15,7 +15,7 @@
 	</script>
 	<script src="<?= base_url('assets/admin') ?>/plugins/highlight/highlight.pack.js"></script>
 	<script src="<?= base_url('assets/admin') ?>/assets/js/custom.js"></script>
-	<script src="<?= base_url('assets') ?>/main/pdps.js"></script>
+	<script src="<?= base_url('assets') ?>/main/login.js"></script>
 
 	<!-- BEGIN THEME GLOBAL STYLE -->
 	<script src="<?= base_url('assets/admin') ?>/assets/js/scrollspyNav.js"></script>

@@ -1,5 +1,5 @@
 $("#logout").click(function () {
-    location.replace("./logout");
+    location.replace("./main/logout");
 });
 
 $(document).ready(function () {
@@ -15,15 +15,17 @@ $(document).ready(function () {
         if (menu == "dashboard") {
             $(".submenu").removeClass('show');
             $('#title-navbar').html("Dashboard");
-            $('.body-switch').load('./dashboard-content');
+            $('.body-switch').load('./main/dashboard');
         } else if (menu == "penduduk") {
             $(".submenu").removeClass('show');
             $('#title-navbar').html("Penduduk");
-            $('.body-switch').load('./penduduk');
+            $('.body-switch').load('./main/penduduk');
         } else if (menu == "karyawan") {
             $(".submenu").removeClass('show');
             $('#title-navbar').html("Karyawan");
-            $('.body-switch').load('./employe');
+            $('.body-switch').load('./main/employe');
+        } else if (menu == "suratMain") {
+            $(".menus").removeAttr('data-active');
         } else if (menu == "report") {
             $(".menus").removeAttr('data-active');
         }
@@ -38,19 +40,19 @@ $(document).ready(function () {
         var surat = $(this).attr('id');
         if (surat == "perusahaan") {
             $('#title-navbar').html("Surat Domisili Perusahaan");
-            $('.body-switch').load('./surat-perusahaan');
+            $('.body-switch').load('./main/suratPerusahaan');
         } else if (surat == "usaha") {
             $('#title-navbar').html("Surat Domisili Usaha");
-            $('.body-switch').load('./surat-usaha');
+            $('.body-switch').load('./main/suratUsaha');
         } else if (surat == "warga") {
             $('#title-navbar').html("Domisili Warga");
-            $('.body-switch').load('./surat-warga');
+            $('.body-switch').load('./main/suratWarga');
         } else if (surat == "kematian") {
             $('#title-navbar').html("Kematian");
-            $('.body-switch').load('./surat-kematian');
+            $('.body-switch').load('./main/suratKematian');
         } else if (surat == "sktm") {
             $('#title-navbar').html("SKTM");
-            $('.body-switch').load('./surat-sktm');
+            $('.body-switch').load('./main/suratSktm');
         }
     });
 
@@ -63,23 +65,23 @@ $(document).ready(function () {
         var report = $(this).attr('id');
         if (report == "perusahaan") {
             $('#title-navbar').html("Domisili Perusahaan");
-            $('.body-switch').load('./report-perusahaan');
+            $('.body-switch').load('./main/domisiliPerusahaan');
         } else if (report == "usaha") {
             $('#title-navbar').html("Domisili Usaha");
-            $('.body-switch').load('./report-usaha');
+            $('.body-switch').load('./main/domisiliUsaha');
         } else if (report == "warga") {
             $('#title-navbar').html("Domisili Warga");
-            $('.body-switch').load('./report-warga');
+            $('.body-switch').load('./main/domisiliWarga');
         } else if (report == "kematian") {
             $('#title-navbar').html("Kematian");
-            $('.body-switch').load('./report-kematian');
+            $('.body-switch').load('./main/kematian');
         } else if (report == "sktm") {
             $('#title-navbar').html("SKTM");
-            $('.body-switch').load('./report-sktm');
+            $('.body-switch').load('./main/sktm');
         }
     });
 
     $(this).attr('data-active', 'true');
     $('#title-navbar').html("Dashboard");
-    $('.body-switch').load('./dashboard-content');
+    $('.body-switch').load('./main/dashboard');
 });

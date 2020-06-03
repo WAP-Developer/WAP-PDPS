@@ -39,8 +39,8 @@ class BaseController extends Controller
 		$this->session = \Config\Services::session();
 		$this->db = \Config\Database::connect();
 		$this->employes = model('App\Models\EmployeModel');
-		$this->report = model('App\Models\ReportModel');
 		$this->admin = model('App\Models\AdminModel');
+		$this->report = model('App\Models\ReportModel');
 		$this->kk = model('App\Models\KkModel');
 		$this->anggota = model('App\Models\AnggotaModel');
 	}

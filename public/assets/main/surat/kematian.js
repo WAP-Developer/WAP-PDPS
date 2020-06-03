@@ -47,7 +47,7 @@ $('form[id=formChecker]').submit(function () {
 
     $.ajax({
         type: "POST",
-        url: "./get-data-bynik",
+        url: "./main/getDataNik",
         data: nik,
         dataType: "JSON",
         success: function (data) {
