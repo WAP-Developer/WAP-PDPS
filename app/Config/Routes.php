@@ -32,16 +32,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/cp-admin/', 'Login::admin');
-$routes->post('/cp-admin/', 'Login::adminprocess');
-
 $routes->get('/dashboard/', 'Main::index');
-
-// Report
-// =====================================
-$routes->get('/get-kematian/', 'Main::getKematian');
-$routes->get('/get-sktm/', 'Main::getSktm');
-$routes->post('/get-kematian/', 'Main::getKematian');
-$routes->post('/get-sktm/', 'Main::getSktm');
 
 /**
  * --------------------------------------------------------------------

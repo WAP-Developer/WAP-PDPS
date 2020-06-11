@@ -43,6 +43,7 @@ class Login extends BaseController
 		if ($user) {
 			if ($user['password'] == md5($password)) {
 				$data = [
+					'id' => $user['id'],
 					'nip'  => $user['nip'],
 					'name'  => $user['nama'],
 					'role' => 'employe'
@@ -68,6 +69,7 @@ class Login extends BaseController
 		if ($user) {
 			if ($user['password'] == md5($password)) {
 				$data = [
+					'id' => $user['id'],
 					'username'  => $user['username'],
 					'name'  => $user['nama'],
 					'role' => 'admin'

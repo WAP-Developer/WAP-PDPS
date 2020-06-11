@@ -3,7 +3,12 @@ $(document).ready(function () {
         $('.preloader').fadeOut();
     }, 800);
 
-    $('#loading-button, .table-responsive, #notfound, #loading, .headtable-detail').hide();
+    $('#back').click(function () {
+        $('#createSurat, #buttonSurat, #loading').hide();
+        $('#searchNIK, #contentFound').show();
+    });
+
+    $('#loading-button, .table-responsive, #notfound, #loading, .headtable-detail, #createSurat, #buttonSurat').hide();
 });
 
 function loadTable(data) {
@@ -28,7 +33,7 @@ function loadTable(data) {
                     <td>` + data[i].nama + `</td>
                     <td>` + data[i].jk + `</td>
                     <td>` + data[i].hubungan + `</td>
-                    <td class="text-center"><button class="btn btn-info btn-sm">Pilih</button></td>
+                    <td class="text-center"><button class="btn btn-info btn-sm" onclick="choosePeople(` + data[i].id + `)">Pilih</button></td>
                 </tr>`;
     }
     $('.nokk').html(data[1].nokk);
@@ -41,7 +46,7 @@ function loadTable(data) {
 $('form[id=formChecker]').submit(function () {
     $('#loading-button').show();
     $('#loading').show();
-    $('#notfound, .table-responsive').hide();
+    $('#notfound, .table-responsive, #finding').hide();
 
     var nik = $('#formChecker').serialize();
 
@@ -62,3 +67,19 @@ $('form[id=formChecker]').submit(function () {
         }
     });
 });
+
+function choosePeople(id) {
+
+    $.ajax({
+        type: "POST",
+        url: "./main/prosesWarga",
+        data: {
+            id: id
+        },
+        success: function (data) {
+            if (data == "success") {
+                window.open('./main/printWarga');
+            }
+        }
+    });
+}

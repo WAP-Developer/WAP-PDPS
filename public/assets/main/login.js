@@ -121,7 +121,7 @@ function loginAdminCheck() {
 
     $.ajax({
         type: "POST",
-        url: "./cp-admin",
+        url: "./login/adminprocess",
         data: datalogin,
         success: function (aksi) {
             if (aksi == 'success') {

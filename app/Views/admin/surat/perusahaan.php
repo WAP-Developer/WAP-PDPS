@@ -10,7 +10,7 @@
 
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6" id="layout-one">
-                    <div class="row">
+                    <div class="row" id="searchNIK">
                         <div class="col-12">
                             <form id="formChecker" action="javascript:void(0);" class="form-inline">
                                 <h5 class="mr-2">Masukan NIK :</h5>
@@ -32,7 +32,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="contentFound">
                         <div class="col-12">
                             <table class="headtable-detail mt-4">
                                 <tr>
@@ -50,6 +50,10 @@
                                 <table class="table table-bordered">
                                 </table>
                             </div>
+                            <div id="finding" class="text-center" style="padding: 50px 0px;">
+                                <img width="200" height="200" src="<?= base_url('assets') ?>/img/finding.svg" alt="not found">
+                                <p>Cari Data Anda Terlebih Dahulu !</p>
+                            </div>
                             <div id="notfound" class="text-center" style="padding: 50px 0px;">
                                 <img width="200" height="200" src="<?= base_url('assets') ?>/img/empty.svg" alt="not found">
                                 <p>Data Tidak Ditemukan!</p>
@@ -60,6 +64,52 @@
                             </div>
                         </div>
                     </div>
+                    <form id="formDomisiliPerusahaan" action="javascript:void(0);">
+                        <div class="row" id="createSurat">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="nik">NIK</label>
+                                    <input type="text" class="form-control" id="nik" disabled>
+                                    <input type="hidden" id="noSurat" name="noSurat">
+                                    <input type="hidden" id="idAnggota" name="id">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama">Nama</label>
+                                    <input type="text" class="form-control" id="nama" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="namaPer">Nama Perusahaan</label>
+                                    <input type="text" class="form-control" id="namaPer" name="namaper" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Bidang">Bidang</label>
+                                    <input type="text" class="form-control" id="Bidang" name="bidang" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Status">Status Bangunan</label>
+                                    <input type="text" class="form-control" id="Status" name="status" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="tJawab">Penanggung Jawab</label>
+                                    <input type="text" class="form-control" id="tJawab" name="tJawab" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="penPer">Pendirian Perusahaan</label>
+                                    <input type="text" class="form-control" id="penPer" name="penPer" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alamat">Alamat Perusahaan</label>
+                                    <textarea class="form-control" id="alamat" name="alamat" rows="4" autocomplete="off" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end mr-3" id="buttonSurat">
+                            <button type="button" class="btn btn-danger mr-2" id="back">Kembali</button>
+                            <button type="submit" class="btn btn-warning" tar>Buat Surat</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 

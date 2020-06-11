@@ -328,9 +328,90 @@ class Main extends BaseController
         }
     }
 
+    public function getDataAnggota()
+    {
+        $id = $this->request->getPost('id');
+        $anggotakk = $this->anggota->where('id', $id)->first();
+
+        echo json_encode($anggotakk);
+    }
+
     public function suratPerusahaan()
     {
         echo view('admin/surat/perusahaan');
+    }
+
+    public function noSuratPerusahaan()
+    {
+        $countOfYear = $this->db->query("SELECT * FROM domisili_perusahaan WHERE YEAR(tanggal_surat) = YEAR(CURDATE())");
+        $nomorSurat = count($countOfYear->getResultArray()) + 1;
+        $nomorSuratDes = sprintf("%03d", $nomorSurat);
+
+        echo $nomorSuratDes . '/' . date('Y') . '/SKDP/Kel';
+    }
+
+    public function prosesPerusahaan()
+    {
+        $id = $this->request->getPost('id');
+        $nosurat = $this->request->getPost('noSurat');
+        $naper = $this->request->getPost('namaper');
+        $bidang = $this->request->getPost('bidang');
+        $status = $this->request->getPost('status');
+        $tjawab = $this->request->getPost('bidang');
+        $penper = $this->request->getPost('penPer');
+        $alamat = $this->request->getPost('alamat');
+
+        if ($nosurat) {
+            $data = [
+                'anggota_kk_id' => $id,
+                'no_surat' => $nosurat,
+                'nama_perusahaan' => $naper,
+                'bidang' => $bidang,
+                'status_bangunan' => $status,
+                'pendirian' => $penper,
+                'penanggung' => $tjawab,
+                'alamat_perusahaan' => $alamat,
+                'tanggal_surat' => date("Y-m-d"),
+                'masa_berlaku' => date('Y-m-d', strtotime('+3 month', strtotime(date('Y-m-d')))),
+                'created_by' => $this->session->get('id'),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+
+            $perusahaanDB = $this->db->table("domisili_perusahaan");
+            $perusahaanDB->insert($data);
+
+            $fetchPerusahaan = $this->db->query("SELECT * FROM domisili_perusahaan WHERE no_surat='$nosurat'");
+            $perusahaan = $fetchPerusahaan->getRowArray();
+
+            $this->session->set('idComp', $perusahaan['id']);
+            $this->session->set('idAnggota', $perusahaan['anggota_kk_id']);
+
+            echo "success";
+        }
+    }
+
+    public function printPerusahaan()
+    {
+        $id = $this->session->get('idComp');
+        $idAnggota = $this->session->get('idAnggota');
+
+        $checkAnggota = $this->db->table('anggota_kk');
+        $checkAnggota->select('anggota_kk.*, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $checkAnggota->join('kk', 'kk.id=anggota_kk.kk_id');
+        $checkAnggota->where('anggota_kk.id', $idAnggota);
+
+        $fetchPerusahaan = $this->db->query("SELECT * FROM domisili_perusahaan WHERE id='$id'");
+
+        $data = [
+            'title' => "Cetak Domisili Perusahaan",
+            'datadiri' => $checkAnggota->get()->getRowArray(),
+            'detail' => $fetchPerusahaan->getRowArray()
+        ];
+
+        if ($fetchPerusahaan->getRowArray()) {
+            echo view('template/surat/perusahaan', $data);
+        }
     }
 
     public function suratUsaha()
@@ -343,6 +424,63 @@ class Main extends BaseController
         echo view('admin/surat/warga');
     }
 
+    public function prosesWarga()
+    {
+        $countOfYear = $this->db->query("SELECT * FROM domisili_warga WHERE YEAR(tanggal_surat) = YEAR(CURDATE())");
+        $nomorSurat = count($countOfYear->getResultArray()) + 1;
+        $nomorSuratDes = sprintf("%03d", $nomorSurat);
+
+        $nosurat = $nomorSuratDes . '/' . date('Y') . '/SKDW/Kel';
+
+        $id = $this->request->getPost('id');
+
+        if ($id) {
+            $data = [
+                'anggota_kk_id' => $id,
+                'no_surat' => $nosurat,
+                'tanggal_surat' => date("Y-m-d"),
+                'masa_berlaku' => date('Y-m-d', strtotime('+3 month', strtotime(date('Y-m-d')))),
+                'created_by' => $this->session->get('id'),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+
+            $perusahaanDB = $this->db->table("domisili_warga");
+            $perusahaanDB->insert($data);
+
+            $fetchWarga = $this->db->query("SELECT * FROM domisili_warga WHERE no_surat='$nosurat'");
+            $warga = $fetchWarga->getRowArray();
+
+            $this->session->set('idWarga', $warga['id']);
+            $this->session->set('idAnggota', $warga['anggota_kk_id']);
+
+            echo "success";
+        }
+    }
+
+    public function printWarga()
+    {
+        $id = $this->session->get('idWarga');
+        $idAnggota = $this->session->get('idAnggota');
+
+        $checkAnggota = $this->db->table('anggota_kk');
+        $checkAnggota->select('anggota_kk.*, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $checkAnggota->join('kk', 'kk.id=anggota_kk.kk_id');
+        $checkAnggota->where('anggota_kk.id', $idAnggota);
+
+        $fetchWarga = $this->db->query("SELECT * FROM domisili_warga WHERE id='$id'");
+
+        $data = [
+            'title' => "Cetak Domisili Warga",
+            'datadiri' => $checkAnggota->get()->getRowArray(),
+            'detail' => $fetchWarga->getRowArray()
+        ];
+
+        if ($fetchWarga->getRowArray()) {
+            echo view('template/surat/warga', $data);
+        }
+    }
+
     public function suratKematian()
     {
         echo view('admin/surat/kematian');
@@ -351,6 +489,62 @@ class Main extends BaseController
     public function suratSktm()
     {
         echo view('admin/surat/sktm');
+    }
+
+    public function prosesSktm()
+    {
+        $countOfYear = $this->db->query("SELECT * FROM sktm WHERE YEAR(tanggal_surat) = YEAR(CURDATE())");
+        $nomorSurat = count($countOfYear->getResultArray()) + 1;
+        $nomorSuratDes = sprintf("%03d", $nomorSurat);
+
+        $nosurat = $nomorSuratDes . '/' . date('Y') . '/SKTM/Kel';
+
+        $id = $this->request->getPost('id');
+
+        if ($id) {
+            $data = [
+                'anggota_kk_id' => $id,
+                'no_surat' => $nosurat,
+                'tanggal_surat' => date("Y-m-d"),
+                'created_by' => $this->session->get('id'),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+
+            $perusahaanDB = $this->db->table("sktm");
+            $perusahaanDB->insert($data);
+
+            $fetchSktm = $this->db->query("SELECT * FROM sktm WHERE no_surat='$nosurat'");
+            $sktm = $fetchSktm->getRowArray();
+
+            $this->session->set('idSktm', $sktm['id']);
+            $this->session->set('idAnggota', $sktm['anggota_kk_id']);
+
+            echo "success";
+        }
+    }
+
+    public function printSktm()
+    {
+        $id = $this->session->get('idSktm');
+        $idAnggota = $this->session->get('idAnggota');
+
+        $checkAnggota = $this->db->table('anggota_kk');
+        $checkAnggota->select('anggota_kk.*, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $checkAnggota->join('kk', 'kk.id=anggota_kk.kk_id');
+        $checkAnggota->where('anggota_kk.id', $idAnggota);
+
+        $fetchSktm = $this->db->query("SELECT * FROM sktm WHERE id='$id'");
+
+        $data = [
+            'title' => "Cetak Domisili Warga",
+            'datadiri' => $checkAnggota->get()->getRowArray(),
+            'detail' => $fetchSktm->getRowArray()
+        ];
+
+        if ($fetchSktm->getRowArray()) {
+            echo view('template/surat/sktm', $data);
+        }
     }
 
     // ========================================================

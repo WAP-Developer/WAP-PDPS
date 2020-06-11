@@ -142,11 +142,11 @@
                                                         <div class="form-group">
                                                             <label for="nama">Nama Lengkap</label>
                                                             <input type="text" class="form-control" id="nama" name="nama" required>
-                                                            <input type="hidden" id="idkk" name="idkk" value="<?= $dataPenduduk['id']; ?>">
+                                                            <input type="hidden" id="idkk" name="idkk" value="<?= $dataPenduduk['id']; ?>" autocomplete="off">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="nik">NIK</label>
-                                                            <input type="text" class="form-control" id="nik" name="nik" required>
+                                                            <input type="text" class="form-control" id="nik" name="nik" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="nama">Jenis Kelamin</label>
@@ -158,11 +158,11 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="tempatlahir">Tempat Lahir</label>
-                                                            <input type="text" class="form-control" id="tempatlahir" name="tempatlahir" required>
+                                                            <input type="text" class="form-control" id="tempatlahir" name="tempatlahir" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="tanggallahir">Tanggal Lahir</label>
-                                                            <input type="date" class="form-control" id="tanggallahir" name="tanggallahir" required>
+                                                            <input type="date" class="form-control" id="tanggallahir" name="tanggallahir" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="agama">Agama</label>
@@ -178,11 +178,11 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="pendidikan">Pendidikan</label>
-                                                            <input type="text" class="form-control" id="pendidikan" name="pendidikan" required>
+                                                            <input type="text" class="form-control" id="pendidikan" name="pendidikan" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="pekerjaan">Jenis Pekerjaan</label>
-                                                            <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" required>
+                                                            <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="goldar">Golongan Darah</label>
@@ -199,15 +199,15 @@
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="statuskawin">Status Perkawinan</label>
-                                                            <input type="text" class="form-control" id="statuskawin" name="statuskawin" required>
+                                                            <input type="text" class="form-control" id="statuskawin" name="statuskawin" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="tglkawin">Tanggal Perkawinan</label>
-                                                            <input type="text" class="form-control" id="tglkawin" name="tglkawin" placeholder="Contoh : 24-06-1990" required>
+                                                            <input type="text" class="form-control" id="tglkawin" name="tglkawin" autocomplete="off" placeholder="Contoh : 24-06-1990" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="hubungan">Hubungan Dalam Keluarga</label>
-                                                            <input type="text" class="form-control" id="hubungan" name="hubungan" required>
+                                                            <input type="text" class="form-control" id="hubungan" name="hubungan" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -219,19 +219,19 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="paspor">No. Paspor</label>
-                                                            <input type="text" class="form-control" id="paspor" name="paspor" required>
+                                                            <input type="text" class="form-control" id="paspor" name="paspor" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="kitap">No. KITAP</label>
-                                                            <input type="text" class="form-control" id="kitap" name="kitap" required>
+                                                            <input type="text" class="form-control" id="kitap" name="kitap" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="ayah">Ayah</label>
-                                                            <input type="text" class="form-control" id="ayah" name="ayah" required>
+                                                            <input type="text" class="form-control" id="ayah" name="ayah" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="ibu">Ibu</label>
-                                                            <input type="text" class="form-control" id="ibu" name="ibu" required>
+                                                            <input type="text" class="form-control" id="ibu" name="ibu" autocomplete="off" required>
                                                         </div>
                                                         <span><i><b>Catatan </b></i></span><br>
                                                         <span><i>* Jika Belum Menikah isi dengan (<b>-</b>)</i></span><br>
@@ -265,13 +265,13 @@
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="nama">Nama Lengkap</label>
-                                                            <input type="text" class="form-control" id="editnama" name="nama" required>
+                                                            <input type="text" class="form-control" id="editnama" name="nama" autocomplete="off" required>
                                                             <input type="hidden" id="editidkk" name="idkk">
                                                             <input type="hidden" id="idag" name="id">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="nik">NIK</label>
-                                                            <input type="text" class="form-control" id="editnik" name="nik" required>
+                                                            <input type="text" class="form-control" id="editnik" name="nik" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="nama">Jenis Kelamin</label>
@@ -284,11 +284,11 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="tempatlahir">Tempat Lahir</label>
-                                                            <input type="text" class="form-control" id="edittempatlahir" name="tempatlahir" required>
+                                                            <input type="text" class="form-control" id="edittempatlahir" name="tempatlahir" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="tanggallahir">Tanggal Lahir</label>
-                                                            <input type="date" class="form-control" id="edittanggallahir" name="tanggallahir" required>
+                                                            <input type="date" class="form-control" id="edittanggallahir" name="tanggallahir" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="agama">Agama</label>
@@ -305,11 +305,11 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="pendidikan">Pendidikan</label>
-                                                            <input type="text" class="form-control" id="editpendidikan" name="pendidikan" required>
+                                                            <input type="text" class="form-control" id="editpendidikan" name="pendidikan" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="pekerjaan">Jenis Pekerjaan</label>
-                                                            <input type="text" class="form-control" id="editpekerjaan" name="pekerjaan" required>
+                                                            <input type="text" class="form-control" id="editpekerjaan" name="pekerjaan" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="goldar">Golongan Darah</label>
@@ -327,15 +327,15 @@
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="statuskawin">Status Perkawinan</label>
-                                                            <input type="text" class="form-control" id="editstatuskawin" name="statuskawin" required>
+                                                            <input type="text" class="form-control" id="editstatuskawin" name="statuskawin" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="tglkawin">Tanggal Perkawinan</label>
-                                                            <input type="text" class="form-control" id="edittglkawin" name="tglkawin" required>
+                                                            <input type="text" class="form-control" id="edittglkawin" name="tglkawin" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="hubungan">Hubungan Dalam Keluarga</label>
-                                                            <input type="text" class="form-control" id="edithubungan" name="hubungan" required>
+                                                            <input type="text" class="form-control" id="edithubungan" name="hubungan" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -348,19 +348,19 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="paspor">No. Paspor</label>
-                                                            <input type="text" class="form-control" id="editpaspor" name="paspor" required>
+                                                            <input type="text" class="form-control" id="editpaspor" name="paspor" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="kitap">No. KITAP</label>
-                                                            <input type="text" class="form-control" id="editkitap" name="kitap" required>
+                                                            <input type="text" class="form-control" id="editkitap" name="kitap" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="ayah">Ayah</label>
-                                                            <input type="text" class="form-control" id="editayah" name="ayah" required>
+                                                            <input type="text" class="form-control" id="editayah" name="ayah" autocomplete="off" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="ibu">Ibu</label>
-                                                            <input type="text" class="form-control" id="editibu" name="ibu" required>
+                                                            <input type="text" class="form-control" id="editibu" name="ibu" autocomplete="off" required>
                                                         </div>
                                                     </div>
                                                 </div>

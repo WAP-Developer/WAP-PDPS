@@ -1,0 +1,55 @@
+body {
+    font-size: 21px;
+}
+
+.logo {
+    margin-left: 50px;
+}
+
+.baseline {
+    margin-top: 20px;
+    border-top: 4px solid black;
+}
+
+.kop-title {
+    font-size: 24px;
+    margin-left: 87px;
+    text-align: center;
+}
+
+.jenis-surat {
+    margin-top: 50px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.nomor-surat {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.isi {
+    margin-top: 50px;
+    text-align: justify;
+}
+
+.pembukaan {
+    text-indent: 2.5rem;
+    font-size: 20px;
+}
+
+.data-pemohon {
+    margin-left: 2.5rem;
+}
+
+.namattd {
+    margin-top: 100px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.tanggal-berlaku {
+    text-align: center;
+    font-weight: bold;
+}

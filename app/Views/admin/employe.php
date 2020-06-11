@@ -34,15 +34,15 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="nip">NIP</label>
-                                        <input type="text" class="form-control" id="nip" name="nip" required>
+                                        <input type="text" class="form-control" id="nip" name="nip" autocomplete="off" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="nama">Nama Lengkap</label>
-                                        <input type="text" class="form-control" id="nama" name="nama" required>
+                                        <input type="text" class="form-control" id="nama" name="nama" autocomplete="off" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="jabatan">Jabatan</label>
-                                        <input type="text" class="form-control" id="jabatan" name="jabatan" required>
+                                        <input type="text" class="form-control" id="jabatan" name="jabatan" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
