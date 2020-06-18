@@ -64,52 +64,6 @@
                             </div>
                         </div>
                     </div>
-                    <form action="<?= base_url('main/prosesPerusahaan') ?>" method="post">
-                        <div class="row" id="createSurat">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="nik">NIK</label>
-                                    <input type="text" class="form-control" id="nik" disabled>
-                                    <input type="hidden" id="noSurat" name="noSurat">
-                                    <input type="hidden" id="idAnggota" name="id">
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama">Nama</label>
-                                    <input type="text" class="form-control" id="nama" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="namaPer">Nama Perusahaan</label>
-                                    <input type="text" class="form-control" id="namaPer" name="namaper" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Bidang">Bidang</label>
-                                    <input type="text" class="form-control" id="Bidang" name="bidang" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Status">Status Bangunan</label>
-                                    <input type="text" class="form-control" id="Status" name="status" required>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="tJawab">Penanggung Jawab</label>
-                                    <input type="text" class="form-control" id="tJawab" name="tJawab" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="penPer">Pendirian Perusahaan</label>
-                                    <input type="text" class="form-control" id="penPer" name="penPer" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="alamat">Alamat Perusahaan</label>
-                                    <textarea class="form-control" id="alamat" name="alamat" rows="4" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-end mr-3" id="buttonSurat">
-                            <button type="button" class="btn btn-danger mr-2" id="back">Kembali</button>
-                            <button type="submit" class="btn btn-warning">Buat Surat</button>
-                        </div>
-                    </form>
                 </div>
             </div>
 

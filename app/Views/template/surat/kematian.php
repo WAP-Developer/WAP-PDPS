@@ -4,7 +4,34 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <link rel="bsi icon" type="image/x-icon" href="favicon.ico">
-    <title>Cetak Surat Domisili</title>
+    <title><?= $title ?></title>
+    <link rel="stylesheet" href="<?= base_url('assets/main/css') ?>/surat.css">
+    <?php
+    function tanggal_indonesia($tanggal)
+    {
+        $bulan = array(
+            1 =>   'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember'
+        );
+
+        $pecahkan = explode('-', $tanggal);
+        return $pecahkan[2] . ' ' . $bulan[(int) $pecahkan[1]] . ' ' . $pecahkan[0];
+    }
+    ?>
+
+    <script>
+        window.print();
+    </script>
 </head>
 
 <body>
@@ -15,7 +42,7 @@
                 <table class="header-cop">
                     <tr>
                         <td>
-                            <img src="./karawang.png" width="80px" class="logo" />
+                            <img src="<?= base_url('assets/img') ?>/karawang.png" width="80px" class="logo" />
                         </td>
                         <td>
                             <div class="kop-title">
@@ -32,7 +59,7 @@
 
                 <div style="width:884px;">
                     <div class="jenis-surat">SURAT KETERANGAN KEMATIAN</div>
-                    <div class="nomor-surat">Nomor: 002/2020/SKK/Kel</div>
+                    <div class="nomor-surat">Nomor: <?= $detail['no_surat'] ?></div>
                     <div class="isi">
                         <div>
                             <p>Yang bertanda tangan dibawah ini menerangkan bahwa :</p>
@@ -42,33 +69,32 @@
                                 <tr>
                                     <td width="210">Nama</td>
                                     <td>:</td>
-                                    <td>Stefano</td>
+                                    <td><?= $datameninggal['nama'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Tempat, Tanggal Lahir</td>
                                     <td>:</td>
-                                    <td>Subang, 13 Juni 2020</td>
+                                    <td><?= $datameninggal['tempat_lahir'] ?>, 13 Juni 2020</td>
                                 </tr>
                                 <tr>
                                     <td width="210">Bin/Binti</td>
                                     <td>:</td>
-                                    <td>Ronaldo</td>
+                                    <td><?= $datameninggal['tempat_lahir'] ?>, <?= tanggal_indonesia($datameninggal['tanggal_lahir']) ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Jenis Kelamin</td>
                                     <td>:</td>
-                                    <td>Laki-Laki</td>
+                                    <td><?= $datameninggal['jk'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Pekerjaan</td>
                                     <td>:</td>
-                                    <td>Freelance</td>
+                                    <td><?= $datameninggal['pekerjaan'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210" style="vertical-align: top;">Alamat</td>
                                     <td style="vertical-align: top;">:</td>
-                                    <td>Kmp. Tanjung Baru RT.02/03 Desa Blanakan Kecamatan Blanakan Kabupaten Subang
-                                        41259
+                                    <td><?= $datameninggal['alamat'] . " RT/RW. " . $datameninggal['rtrw'] . " Desa. " . $datameninggal['desa'] . " Kecamatan. " . $datameninggal['kecamatan'] . " Kabupaten. " . $datameninggal['kabupaten'] . " " . $datameninggal['kodepos'] ?>
                                     </td>
                                 </tr>
                             </table>
@@ -79,22 +105,22 @@
                                 <tr>
                                     <td width="210">Hari</td>
                                     <td>:</td>
-                                    <td>Selasa</td>
+                                    <td><?= $detail['hari'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Tanggal</td>
                                     <td>:</td>
-                                    <td>12 Januari 2020</td>
+                                    <td><?= tanggal_indonesia($detail['tanggal']) ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Jam</td>
                                     <td>:</td>
-                                    <td>13:00 WIB</td>
+                                    <td><?= date("H:i", strtotime($detail['jam'])) ?> WIB</td>
                                 </tr>
                                 <tr>
                                     <td width="210">Meninggal di</td>
                                     <td>:</td>
-                                    <td>Mana Aja</td>
+                                    <td><?= $detail['lokasi'] ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -105,33 +131,32 @@
                                 <tr>
                                     <td width="210">Nama</td>
                                     <td>:</td>
-                                    <td>Febri Haryadi</td>
+                                    <td><?= $datadiri['nama'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Tempat, Tanggal Lahir</td>
                                     <td>:</td>
-                                    <td>Subang, 12 Mei 2012</td>
+                                    <td><?= $datadiri['tempat_lahir'] ?>, <?= tanggal_indonesia($datadiri['tanggal_lahir']) ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">NIK</td>
                                     <td>:</td>
-                                    <td>32131313994952164</td>
+                                    <td><?= $datadiri['nik'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Jenis Kelamin</td>
                                     <td>:</td>
-                                    <td>Laki-Laki</td>
+                                    <td><?= $datadiri['jk'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Hubungan Pelapor</td>
                                     <td>:</td>
-                                    <td>Saudara</td>
+                                    <td><?= $detail['hubungan'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210" style="vertical-align: top;">Alamat</td>
                                     <td style="vertical-align: top;">:</td>
-                                    <td>Kmp. Tanjung Baru RT.02/03 Desa Blanakan Kecamatan Blanakan Kabupaten Subang
-                                        41259
+                                    <td><?= $datadiri['alamat'] . " RT/RW. " . $datadiri['rtrw'] . " Desa. " . $datadiri['desa'] . " Kecamatan. " . $datadiri['kecamatan'] . " Kabupaten. " . $datadiri['kabupaten'] . " " . $datadiri['kodepos'] ?>
                                     </td>
                                 </tr>
                             </table>
@@ -144,7 +169,7 @@
                 <table style="margin-top:100px;">
                     <tr>
                         <td width="439" align="center"></td>
-                        <td width="439" align="center">Karawang, 13 September 2019</td>
+                        <td width="439" align="center">Karawang, <?= tanggal_indonesia($detail['tanggal_surat']) ?></td>
                     </tr>
                     <tr>
                         <td width="439" align="center"></td>

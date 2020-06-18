@@ -1,3 +1,8 @@
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="<?= base_url('assets/admin') ?>/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/admin') ?>/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+    <!-- END THEME GLOBAL STYLES -->
+
     <div class="preloader">
         <div class="loading">
             <img src="<?= base_url('assets') ?>/img/infinity.gif" width="80">
@@ -97,7 +102,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="penPer">Pendirian Perusahaan</label>
-                                    <input type="text" class="form-control" id="penPer" name="penPer" autocomplete="off" required>
+                                    <input id="basicFlatpickr" class="form-control flatpickr flatpickr-input" type="text" id="penPer" name="penPer" placeholder="Pilih Tanggal.." readonly="readonly" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat Perusahaan</label>
@@ -124,5 +129,11 @@
 
     <script src="<?= base_url('assets/admin'); ?>/plugins/table/datatable/datatables.js"></script>
     <script src="<?= base_url('assets/admin') ?>/plugins/notification/snackbar/snackbar.min.js"></script>
+
+    <script src="<?= base_url('assets/admin') ?>/plugins/flatpickr/flatpickr.js"></script>
+
+    <script>
+        var f1 = flatpickr(document.getElementById('basicFlatpickr'));
+    </script>
 
     <script src="<?= base_url('assets/main/surat'); ?>/perusahaan.js"></script>

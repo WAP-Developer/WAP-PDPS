@@ -419,6 +419,74 @@ class Main extends BaseController
         echo view('admin/surat/usaha');
     }
 
+    public function prosesUsaha()
+    {
+        $countOfYear = $this->db->query("SELECT * FROM domisili_usaha WHERE YEAR(tanggal_surat) = YEAR(CURDATE())");
+        $nomorSurat = count($countOfYear->getResultArray()) + 1;
+        $nomorSuratDes = sprintf("%03d", $nomorSurat);
+
+        $nosurat = $nomorSuratDes . '/' . date('Y') . '/SKDU/Kel';
+
+        $id = $this->request->getPost('id');
+        $jenisUsaha = $this->request->getPost('jenis');
+        $mulaiUsaha = $this->request->getPost('mulai');
+        $alamatUsaha = $this->request->getPost('alamat');
+
+        $queryAnggota = $this->db->table('anggota_kk');
+        $queryAnggota->select('anggota_kk.*, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $queryAnggota->join('kk', 'kk.id=anggota_kk.kk_id');
+        $queryAnggota->where('anggota_kk.id', $id);
+
+        $fetchAnggota = $queryAnggota->get()->getRowArray();
+
+        $data = [
+            'nik_umum' => $fetchAnggota['nik'],
+            'nama' => $fetchAnggota['nama'],
+            'tempat_lahir' => $fetchAnggota['tempat_lahir'],
+            'tanggal_lahir' => $fetchAnggota['tanggal_lahir'],
+            'jenis_kelamin' => $fetchAnggota['jk'],
+            'pekerjaan' => $fetchAnggota['pekerjaan'],
+            'alamat' => $fetchAnggota['alamat'] . " RT/RW. " . $fetchAnggota['rtrw'] . " Desa. " . $fetchAnggota['desa'] . " Kecamatan. " . $fetchAnggota['kecamatan'] . " Kabupaten. " . $fetchAnggota['kabupaten'] . " " . $fetchAnggota['kodepos'],
+            'no_surat' => $nosurat,
+            'jenis_usaha' => $jenisUsaha,
+            'mulai_usaha' => $mulaiUsaha,
+            'alamat_usaha' => $alamatUsaha,
+            'masa_berlaku' => date('Y-m-d', strtotime('+3 month', strtotime(date('Y-m-d')))),
+            'tanggal_surat' => date("Y-m-d"),
+            'created_by' => $this->session->get('id'),
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        ];
+
+        if ($id) {
+            $usahaDB = $this->db->table("domisili_usaha");
+            $usahaDB->insert($data);
+
+            $fetchUsaha = $this->db->query("SELECT * FROM domisili_usaha WHERE no_surat='$nosurat'");
+            $usaha = $fetchUsaha->getRowArray();
+
+            $this->session->set('idUsaha', $usaha['id']);
+
+            echo "success";
+        }
+    }
+
+    public function printUsaha()
+    {
+        $id = $this->session->get('idUsaha');
+
+        $fetchUsaha = $this->db->query("SELECT * FROM domisili_usaha WHERE id='$id'");
+
+        $data = [
+            'title' => "Cetak Domisili Usaha",
+            'datadiri' => $fetchUsaha->getRowArray()
+        ];
+
+        if ($fetchUsaha->getRowArray()) {
+            echo view('template/surat/usaha', $data);
+        }
+    }
+
     public function suratWarga()
     {
         echo view('admin/surat/warga');
@@ -445,8 +513,8 @@ class Main extends BaseController
                 'updated_at' => date("Y-m-d H:i:s")
             ];
 
-            $perusahaanDB = $this->db->table("domisili_warga");
-            $perusahaanDB->insert($data);
+            $wargaDB = $this->db->table("domisili_warga");
+            $wargaDB->insert($data);
 
             $fetchWarga = $this->db->query("SELECT * FROM domisili_warga WHERE no_surat='$nosurat'");
             $warga = $fetchWarga->getRowArray();
@@ -486,6 +554,199 @@ class Main extends BaseController
         echo view('admin/surat/kematian');
     }
 
+    public function prosesKematian()
+    {
+        $countOfYear = $this->db->query("SELECT * FROM kematian WHERE YEAR(tanggal_surat) = YEAR(CURDATE())");
+        $nomorSurat = count($countOfYear->getResultArray()) + 1;
+        $nomorSuratDes = sprintf("%03d", $nomorSurat);
+
+        $nosurat = $nomorSuratDes . '/' . date('Y') . '/SKK/Kel';
+
+        $idPelapor = $this->request->getPost('idpelapor');
+
+        $idMeninggal = $this->request->getPost('idmeninggal');
+        $fetchNikMeninggal = $this->db->query("SELECT * FROM anggota_kk WHERE id='$idMeninggal'");
+        $nikMeninggal = $fetchNikMeninggal->getRowArray();
+
+        $hari = $this->request->getPost('hari');
+        $tanggal = $this->request->getPost('tanggal');
+        $jam = $this->request->getPost('jam');
+        $lokasi = $this->request->getPost('lokasi');
+        $hubungan = $this->request->getPost('hubungan');
+
+        if ($idPelapor) {
+            $data = [
+                'no_surat' => $nosurat,
+                'anggota_kk_id' => $idPelapor,
+                'nik_meninggal' => $nikMeninggal['nik'],
+                'hari' => $hari,
+                'tanggal' => $tanggal,
+                'jam' => $jam,
+                'lokasi' => $lokasi,
+                'hubungan' => $hubungan,
+                'tanggal_surat' => date("Y-m-d"),
+                'created_by' => $this->session->get('id'),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+
+            $kematianDB = $this->db->table("kematian");
+            $kematianDB->insert($data);
+
+            $fetchKematian = $this->db->query("SELECT * FROM kematian WHERE no_surat='$nosurat'");
+            $kematian = $fetchKematian->getRowArray();
+
+            $this->session->set('idKematian', $kematian['id']);
+            $this->session->set('idAnggota', $kematian['anggota_kk_id']);
+            $this->session->set('nikMeninggal', $kematian['nik_meninggal']);
+
+            echo "success";
+        }
+    }
+
+    public function printKematian()
+    {
+        $id = $this->session->get('idKematian');
+        $idAnggota = $this->session->get('idAnggota');
+        $nikMeninggal = $this->session->get('nikMeninggal');
+
+        $checkPelapor = $this->db->table('anggota_kk');
+        $checkPelapor->select('anggota_kk.*, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $checkPelapor->join('kk', 'kk.id=anggota_kk.kk_id');
+        $checkPelapor->where('anggota_kk.id', $idAnggota);
+
+        $checkMeninggal = $this->db->table('anggota_kk');
+        $checkMeninggal->select('anggota_kk.*, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $checkMeninggal->join('kk', 'kk.id=anggota_kk.kk_id');
+        $checkMeninggal->where('anggota_kk.nik', $nikMeninggal);
+
+        $fetchKematian = $this->db->query("SELECT * FROM kematian WHERE id='$id'");
+
+        $data = [
+            'title' => "Cetak Keterangan Kematian",
+            'datadiri' => $checkPelapor->get()->getRowArray(),
+            'datameninggal' => $checkMeninggal->get()->getRowArray(),
+            'detail' => $fetchKematian->getRowArray()
+        ];
+
+        if ($fetchKematian->getRowArray()) {
+            echo view('template/surat/kematian', $data);
+        }
+    }
+
+    public function suratPindah()
+    {
+        echo view('admin/surat/pindah');
+    }
+
+    public function prosesPindah()
+    {
+        $countOfYear = $this->db->query("SELECT * FROM pindah WHERE YEAR(tanggal_surat) = YEAR(CURDATE())");
+        $nomorSurat = count($countOfYear->getResultArray()) + 1;
+        $nomorSuratDes = sprintf("%03d", $nomorSurat);
+
+        $nosurat = $nomorSuratDes . '/' . date('Y') . '/SKP/Kel';
+
+        $id = $this->request->getPost('id');
+        $alasan = $this->request->getPost('alasan');
+        $klasifikasi = $this->request->getPost('klasifikasi');
+        $jenis = $this->request->getPost('jenis');
+        $alamat = $this->request->getPost('alamat');
+        $rt = $this->request->getPost('rt');
+        $desa = $this->request->getPost('desa');
+        $kecamatan = $this->request->getPost('kecamatan');
+        $kab = $this->request->getPost('kab');
+        $provinsi = $this->request->getPost('prov');
+        $tanggal = $this->request->getPost('tanggal');
+
+        if ($id) {
+            $data = [
+                'anggota_kk_id' => $id,
+                'no_surat' => $nosurat,
+                'alasan' => $alasan,
+                'klasifikasi' => $klasifikasi,
+                'jenis_kepindahan' => $jenis,
+                'alamat_tujuan' => $alamat,
+                'rt_tujuan' => $rt,
+                'desa_tujuan' => $desa,
+                'kecamatan_tujuan' => $kecamatan,
+                'kabupaten_tujuan' => $kab,
+                'provinsi' => $provinsi,
+                'tanggal_pindah' => $tanggal,
+                'tanggal_surat' => date("Y-m-d"),
+                'created_by' => $this->session->get('id'),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+
+            $pindahDB = $this->db->table("pindah");
+            $pindahDB->insert($data);
+
+            $fetchPindah = $this->db->query("SELECT * FROM pindah WHERE no_surat='$nosurat'");
+            $pindah = $fetchPindah->getRowArray();
+
+            $this->session->set('idPindah', $pindah['id']);
+            $this->session->set('idAg', $pindah['anggota_kk_id']);
+
+            echo $pindah['id'];
+        }
+    }
+
+    public function insertPindahAnggota()
+    {
+        $idPindah = $this->request->getPost('idPindah');
+        $idAnggota = $this->request->getPost('idAg');
+
+        $fetchAnggota = $this->anggota->where('id', $idAnggota)->first();
+
+        $nik = $fetchAnggota['nik'];
+
+        $fetchPindah = $this->db->query("SELECT * FROM pindah_anggota WHERE nik='$nik'");
+
+        if (!$fetchPindah->getRowArray()) {
+            $data = [
+                'pindah_id' => $idPindah,
+                'nik' => $fetchAnggota['nik'],
+                'nama' => $fetchAnggota['nama'],
+                'jk' => $fetchAnggota['jk'],
+                'status' => $fetchAnggota['status_nikah'],
+                'hdk' => $fetchAnggota['hubungan']
+            ];
+
+            $insertPindahDB = $this->db->table("pindah_anggota");
+            $insertPindahDB->insert($data);
+        } else {
+            $deletePindahDB = $this->db->table("pindah_anggota");
+            $deletePindahDB->delete(['nik' => $nik]);
+        }
+    }
+
+    public function printPindah()
+    {
+        $id = $this->session->get('idPindah');
+        $idAg = $this->session->get('idAg');
+
+        $checkAnggota = $this->db->table('anggota_kk');
+        $checkAnggota->select('anggota_kk.*, kk.nokk, kk.kepalakk, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $checkAnggota->join('kk', 'kk.id=anggota_kk.kk_id');
+        $checkAnggota->where('anggota_kk.id', $idAg);
+
+        $fetchPindah = $this->db->query("SELECT * FROM pindah WHERE id='$id'");
+
+        $detailAnggota = $this->db->query("SELECT * FROM pindah_anggota WHERE pindah_id='$id'");
+
+        $data = [
+            'title' => "Cetak Keterangan Pindah",
+            'datadiri' => $checkAnggota->get()->getRowArray(),
+            'detail' => $fetchPindah->getRowArray(),
+            'detailAnggota' => $detailAnggota->getResultArray()
+        ];
+
+        if ($fetchPindah->getRowArray()) {
+            echo view('template/surat/pindah', $data);
+        }
+    }
+
     public function suratSktm()
     {
         echo view('admin/surat/sktm');
@@ -511,8 +772,8 @@ class Main extends BaseController
                 'updated_at' => date("Y-m-d H:i:s")
             ];
 
-            $perusahaanDB = $this->db->table("sktm");
-            $perusahaanDB->insert($data);
+            $sktmDB = $this->db->table("sktm");
+            $sktmDB->insert($data);
 
             $fetchSktm = $this->db->query("SELECT * FROM sktm WHERE no_surat='$nosurat'");
             $sktm = $fetchSktm->getRowArray();

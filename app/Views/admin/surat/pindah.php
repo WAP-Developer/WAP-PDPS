@@ -1,7 +1,3 @@
-    <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="<?= base_url('assets/admin') ?>/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url('assets/admin') ?>/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-    <!-- END THEME GLOBAL STYLES -->
     <div class="preloader">
         <div class="loading">
             <img src="<?= base_url('assets') ?>/img/infinity.gif" width="80">
@@ -51,7 +47,7 @@
                                 </tr>
                             </table>
                             <div class="table-responsive mt-1">
-                                <table class="table table-bordered">
+                                <table class="table tablef table-bordered">
                                 </table>
                             </div>
                             <div id="finding" class="text-center" style="padding: 50px 0px;">
@@ -68,39 +64,93 @@
                             </div>
                         </div>
                     </div>
-                    <form id="formDomisiliUsaha" action="javascript:void(0);">
+                    <form id="formPindah" action="javascript:void(0);">
                         <div class="row" id="createSurat">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="nik">NIK</label>
+                                    <label for="nik">NIK Pemohon</label>
                                     <input type="text" class="form-control" id="nik" disabled>
+                                    <input type="hidden" id="noSurat" name="noSurat">
                                     <input type="hidden" id="idAnggota" name="id">
                                 </div>
                                 <div class="form-group">
-                                    <label for="nama">Nama</label>
+                                    <label for="nama">Nama Pemohon</label>
                                     <input type="text" class="form-control" id="nama" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label for="jenis">Jenis Usaha</label>
+                                    <label for="Alasan">Alasan Pindah</label>
+                                    <input type="text" class="form-control" id="Alasan" name="alasan" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="klasifikasi">Klasifikasi Pindah</label>
+                                    <input type="text" class="form-control" id="klasifikasi" name="klasifikasi" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jenis">Jenis Kepindahan</label>
                                     <input type="text" class="form-control" id="jenis" name="jenis" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alamat">Alamat Tujuan</label>
+                                    <textarea class="form-control" id="alamat" name="alamat" rows="4" autocomplete="off" required></textarea>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="tJawab">Mulai Usaha</label>
-                                    <input id="basicFlatpickr" class="form-control flatpickr flatpickr-input" type="text" id="tanggal" name="mulai" placeholder="Pilih Tanggal.." readonly="readonly" required>
+                                    <label for="rt">RT/RW Tujuan</label>
+                                    <input type="text" class="form-control" id="rt" name="rt" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="alamat">Alamat Usaha</label>
-                                    <textarea class="form-control" id="alamat" name="alamat" rows="4" required></textarea>
+                                    <label for="desa">Desa Tujuan</label>
+                                    <input type="text" class="form-control" id="desa" name="desa" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kecamatan">Kecamatan Tujuan</label>
+                                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kab">Kabupaten Tujuan</label>
+                                    <input type="text" class="form-control" id="kab" name="kab" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prov">Provinsi Tujuan</label>
+                                    <input type="text" class="form-control" id="prov" name="prov" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tanggal">Tanggal Pindah</label>
+                                    <input id="basicFlatpickr" class="form-control flatpickr flatpickr-input" type="text" id="tanggal" name="tanggal" placeholder="Pilih Tanggal.." readonly="readonly" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row justify-content-end mr-3" id="buttonSurat">
                             <button type="button" class="btn btn-danger mr-2" id="back">Kembali</button>
-                            <button type="submit" class="btn btn-warning">Buat Surat</button>
+                            <button type="submit" class="btn btn-info">Selanjutnya</button>
                         </div>
                     </form>
+                    <div class="row" id="pilihAnggota">
+                        <div class="col-12">
+                            <h5>Pilih Anggota Pindah</h5>
+                            <table class="headtable-detail mt-4">
+                                <tr>
+                                    <td>No KK</td>
+                                    <td width="20px" align="center">:</td>
+                                    <td><b><span class="nokk"></span></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Kepala KK</td>
+                                    <input type="hidden" class="form-control" id="idPindah">
+                                    <td width="20px" align="center">:</td>
+                                    <td><b><span class="kepalakk"></span></b></td>
+                                </tr>
+                            </table>
+                            <div class="table-responsive mt-1">
+                                <table class="table tablec table-bordered">
+                                </table>
+                            </div>
+                            <div class="row justify-content-end mr-3">
+                                <button type="button" class="btn btn-warning createSurat">Buat Surat</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -121,4 +171,4 @@
         var f1 = flatpickr(document.getElementById('basicFlatpickr'));
     </script>
 
-    <script src="<?= base_url('assets/main/surat'); ?>/usaha.js"></script>
+    <script src="<?= base_url('assets/main/surat'); ?>/pindah.js"></script>

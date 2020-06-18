@@ -1,63 +1,38 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <link rel="bsi icon" type="image/x-icon" href="favicon.ico">
-    <title>Cetak Surat Domisili</title>
-    <style>
-        body {
-            font-size: 21px;
-        }
+    <title><?= $title ?></title>
+    <link rel="stylesheet" href="<?= base_url('assets/main/css') ?>/surat.css">
+    <?php
+    function tanggal_indonesia($tanggal)
+    {
+        $bulan = array(
+            1 =>   'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember'
+        );
 
-        .logo {
-            margin-left: 50px;
-        }
+        $pecahkan = explode('-', $tanggal);
+        return $pecahkan[2] . ' ' . $bulan[(int) $pecahkan[1]] . ' ' . $pecahkan[0];
+    }
+    ?>
 
-        .baseline {
-            margin-top: 20px;
-            border-top: 4px solid black;
-        }
+    <script>
+        window.print();
+    </script>
 
-        .kop-title {
-            font-size: 24px;
-            margin-left: 87px;
-            text-align: center;
-        }
-
-        .jenis-surat {
-            margin-top: 50px;
-            font-weight: bold;
-            text-decoration: underline;
-            text-align: center;
-        }
-
-        .nomor-surat {
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .isi {
-            margin-top: 50px;
-            text-align: justify;
-        }
-
-        .pembukaan {
-            text-indent: 2.5rem;
-            font-size: 20px;
-        }
-
-        .data-pemohon {
-            margin-left: 2.5rem;
-        }
-
-        .namattd {
-            margin-top: 100px;
-            font-weight: bold;
-            text-decoration: underline;
-        }
-    </style>
 </head>
 
 <body>
@@ -68,7 +43,7 @@
                 <table class="header-cop">
                     <tr>
                         <td>
-                            <img src="./karawang.png" width="80px" class="logo" />
+                            <img src="<?= base_url('assets/img') ?>/karawang.png" width="80px" class="logo" />
                         </td>
                         <td>
                             <div class="kop-title">
@@ -85,7 +60,7 @@
 
                 <div style="width:884px;">
                     <div class="jenis-surat">SURAT KETERANGAN DOMISILI USAHA</div>
-                    <div class="nomor-surat">Nomor: 002/2020/SKDU/Kel</div>
+                    <div class="nomor-surat">Nomor: <?= $datadiri['no_surat'] ?></div>
                     <div class="isi">
                         <div class="pembukaan">
                             <p>Yang bertanda tangan dibawah ini Kepala Kelurahan Karangpawitan Kecamatan Karawang Barat
@@ -96,34 +71,32 @@
                                 <tr>
                                     <td width="210">Nama</td>
                                     <td>:</td>
-                                    <td>Aldi Wiguna</td>
+                                    <td><?= $datadiri['nama'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Tempat, Tanggal Lahir</td>
                                     <td>:</td>
-                                    <td>Subang, 13 Juni 2020</td>
+                                    <td><?= $datadiri['tempat_lahir'] ?>, <?= tanggal_indonesia($datadiri['tanggal_lahir']) ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">NIK</td>
                                     <td>:</td>
-                                    <td>3213131309990001</td>
+                                    <td><?= $datadiri['nik_umum'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Jenis Kelamin</td>
                                     <td>:</td>
-                                    <td>Laki-Laki</td>
+                                    <td><?= $datadiri['jenis_kelamin'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Pekerjaan</td>
                                     <td>:</td>
-                                    <td>Freelance</td>
+                                    <td><?= $datadiri['pekerjaan'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210" style="vertical-align: top;">Alamat</td>
                                     <td style="vertical-align: top;">:</td>
-                                    <td>Kmp. Tanjung Baru RT.02/03 Desa Blanakan Kecamatan Blanakan Kabupaten Subang
-                                        41259
-                                    </td>
+                                    <td><?= $datadiri['alamat'] ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -134,22 +107,21 @@
                                 <tr>
                                     <td width="210">Jenis Usaha</td>
                                     <td>:</td>
-                                    <td>Industri Kreatif</td>
+                                    <td><?= $datadiri['jenis_usaha'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Mulai Usaha</td>
                                     <td>:</td>
-                                    <td>12 Januari 2020</td>
+                                    <td><?= tanggal_indonesia($datadiri['mulai_usaha']) ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210" style="vertical-align: top;">Alamat Usaha</td>
                                     <td style="vertical-align: top;">:</td>
-                                    <td>Kmp. Tanjung Baru RT.02/03 Desa Blanakan Kecamatan Blanakan Kabupaten Subang
-                                        41259</td>
+                                    <td><?= $datadiri['alamat_usaha'] ?></td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="pembukaan" style="margin-top: 10px;">Masa berlaku sampai dengan tanggal :</div>
+                        <div class="pembukaan" style="margin-top: 10px;">Masa berlaku sampai dengan tanggal : <b><?= tanggal_indonesia($datadiri['masa_berlaku']) ?></b></div>
                         <div class="pembukaan" style="margin-top: 10px;">Demikian Surat Keterangan ini kami buat dengan
                             sebenarnya dan dapat dipergunakan sebagaimana mestinya. </div>
                     </div>
@@ -158,7 +130,7 @@
                 <table style="margin-top:100px;">
                     <tr>
                         <td width="439" align="center"></td>
-                        <td width="439" align="center">Karawang, 13 September 2019</td>
+                        <td width="439" align="center">Karawang, <?= tanggal_indonesia($datadiri['tanggal_surat']) ?></td>
                     </tr>
                     <tr>
                         <td width="439" align="center">Yang Bersangkutan,</td>

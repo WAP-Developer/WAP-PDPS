@@ -5,7 +5,8 @@ $("#logout").click(function () {
 $(document).ready(function () {
     $('.menus').click(function () {
 
-        $('.menu-active').removeClass('active');
+        $('.report-active').removeClass('active');
+        $('.surat-active').removeClass('active');
         $(".menus").removeAttr('data-active');
         $(".menus").attr('aria-expanded', 'false');
         $(this).attr('data-active', 'true');
@@ -50,6 +51,9 @@ $(document).ready(function () {
         } else if (surat == "kematian") {
             $('#title-navbar').html("Kematian");
             $('.body-switch').load('./main/suratKematian');
+        } else if (surat == "pindah") {
+            $('#title-navbar').html("Pindah");
+            $('.body-switch').load('./main/suratPindah');
         } else if (surat == "sktm") {
             $('#title-navbar').html("SKTM");
             $('.body-switch').load('./main/suratSktm');
