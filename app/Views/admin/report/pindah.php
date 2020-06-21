@@ -2,6 +2,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/admin'); ?>/plugins/table/datatable/datatables.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/admin'); ?>/plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/admin'); ?>/plugins/table/datatable/dt-global_style.css">
+
     <div class="preloader">
         <div class="loading">
             <img src="<?= base_url('assets') ?>/img/infinity.gif" width="80">
@@ -40,6 +41,25 @@
 
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="selectPindah" tabindex="-1" role="dialog" aria-labelledby="selectPindah" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="selectPindah">Daftar Anggota</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-anggota">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end Modal -->
+
         <div class="footer-wrapper">
             <div class="footer-section f-section-1">
                 <p class="">© 2020 Seluruh Hak Cipta, Code of The Core Developer.</p>
@@ -65,4 +85,4 @@
             mode: "range"
         });
     </script>
-    <script src="<?= base_url('assets/main/report'); ?>/domisiliPerusahaan.js"></script>
+    <script src="<?= base_url('assets/main/report'); ?>/pindah.js"></script>

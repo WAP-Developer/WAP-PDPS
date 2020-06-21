@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/cp-admin/', 'Login::admin');
 $routes->get('/dashboard/', 'Main::index');
+$routes->get('/lockscreen/', 'Login::lock');
 
 /**
  * --------------------------------------------------------------------

@@ -79,7 +79,7 @@
                                 <tr>
                                     <td width="210">Bin/Binti</td>
                                     <td>:</td>
-                                    <td><?= $datameninggal['tempat_lahir'] ?>, <?= tanggal_indonesia($datameninggal['tanggal_lahir']) ?></td>
+                                    <td><?= $detail['bin'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Jenis Kelamin</td>

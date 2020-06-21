@@ -4,7 +4,7 @@
 			<div class="form-container">
 				<div class="form-content">
 
-					<h1 class="">Selamat Datang di Aplikasi <a href="<?= base_url() ?>"><span class="brand-name">PDPS</span></a></h1>
+					<h1 class="">Hello Admin <a href="<?= base_url() ?>"><span class="brand-name">PDPS</span></a></h1>
 					<p class="signup-link">"Pengelolaan Data Penduduk & Pembuatan Surat"</p>
 
 					<?php
@@ -53,7 +53,7 @@
 		</div>
 	</div>
 	<div class="form-image">
-		<div class="l-image">
+		<div class="admin-image">
 		</div>
 	</div>
 </div>

@@ -4,7 +4,7 @@ $(document).ready(function () {
     }, 800);
 
     $.ajax({
-        url: "./main/getDomisiliWarga",
+        url: "./main/getKematian",
         dataType: "JSON",
         success: function (data) {
             loadData(data)
@@ -31,7 +31,6 @@ function loadData(data) {
                         <th>Jam</th>
                         <th>Hari</th>
                         <th>Lokasi</th>
-                        <th>Penyebab</th>
                         <th>Tanggal</th>
                         <th>Tanggal Surat</th>
                         <th>Aksi</th>
@@ -49,11 +48,10 @@ function loadData(data) {
                     <td>` + data[i].jam + `</td>
                     <td>` + data[i].hari + `</td>
                     <td>` + data[i].lokasi + `</td>
-                    <td>` + data[i].penyebab + `</td>
                     <td>` + data[i].tanggal + `</td>
                     <td>` + data[i].tanggal_surat + `</td>
                     <td>                        
-                        <button type="button" class="btn btn-warning btn-sm" data-id="">Cetak Surat</button>
+                        <button type="button" class="btn btn-warning btn-sm" onclick="rePrint(` + data[i].id + `)">Cetak Surat</button>
                     </td>
                 </tr>`;
     }
@@ -95,7 +93,7 @@ $('form[id=formFilter]').submit(function () {
 
     $.ajax({
         type: "POST",
-        url: "./main/getDomisiliWarga",
+        url: "./main/getKematian",
         data: date,
         dataType: "JSON",
         success: function (data) {
@@ -105,3 +103,18 @@ $('form[id=formFilter]').submit(function () {
         }
     });
 });
+
+function rePrint(id) {
+    $.ajax({
+        type: "POST",
+        url: "./main/rePrintKematianProcess",
+        data: {
+            id: id
+        },
+        success: function (data) {
+            if (data == 'success') {
+                window.open('./main/printKematian');
+            }
+        }
+    });
+}

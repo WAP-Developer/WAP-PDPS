@@ -117,16 +117,16 @@
 
                 <table style="margin-top:100px;">
                     <tr>
-                        <td width="439" align="center">Mengetahui,</td>
+                        <td width="439" align="center"></td>
                         <td width="439" align="center">Karawang, <?= tanggal_indonesia($detail['tanggal_surat']) ?></td>
                     </tr>
                     <tr>
-                        <td width="439" align="center">Yang Bersangkutan</td>
+                        <td width="439" align="center"></td>
                         <td width="439" align="center">Lurah Karangpawitan</td>
                     </tr>
                     <tr>
                         <td width="439" align="center">
-                            <div class="namattd">Nama Bersangkutan</div>
+                            <div class="namattd"></div>
                         </td>
                         <td width="439" align="center">
                             <div class="namattd">Nama Bersangkutan</div>

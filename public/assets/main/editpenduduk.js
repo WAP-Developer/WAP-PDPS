@@ -67,7 +67,7 @@ function load_data() {
             }
             $('#tabel-anggota').html(html);
         }
-    })
+    });
 };
 
 // add Anggota

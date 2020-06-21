@@ -192,21 +192,21 @@
                     </tr>
                     <tr>
                         <td width="439" align="center">
-                            Mengetahui, <br>
+                            Pemohon, <br>
                             Nomor: <?= $detail['no_surat'] ?>
                         </td>
                         <td width="439" align="center" style="vertical-align: top;">Lurah Karangpawitan</td>
                     </tr>
                     <tr>
                         <td width="439" align="center">
-                            <div class="namattd" style="vertical-align: top;">Nama Bersangkutan</div>
+                            <div class="namattd" style="vertical-align: top;"><?= $datadiri['nama'] ?></div>
                         </td>
                         <td width="439" align="center">
                             <div class="namattd">Nama Bersangkutan</div>
                         </td>
                     </tr>
                     <tr>
-                        <td width="439" align="center"></td>
+                        <td width="439" align="center"><b>NIK. <?= $datadiri['nik'] ?></b></td>
                         <td width="439" align="center"><b>NIP. 1516564165156165</b></td>
                     </tr>
                 </table>

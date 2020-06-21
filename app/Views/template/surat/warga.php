@@ -133,7 +133,7 @@
                     </tr>
                     <tr>
                         <td width="439" align="center">
-                            <div class="namattd">Nama Bersangkutan</div>
+                            <div class="namattd"><?= $datadiri['nama'] ?></div>
                         </td>
                         <td width="439" align="center">
                             <div class="namattd">Nama Bersangkutan</div>

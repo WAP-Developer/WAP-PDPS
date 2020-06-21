@@ -4,7 +4,7 @@ $(document).ready(function () {
     }, 800);
 
     $.ajax({
-        url: "./main/getDomisiliWarga",
+        url: "./main/getPindah",
         dataType: "JSON",
         success: function (data) {
             loadData(data)
@@ -13,22 +13,31 @@ $(document).ready(function () {
 
     $('#loading').hide();
     $('#table-report').show();
-})
+});
 
 function loadData(data) {
     var html = '';
     html += `
-            <table table table id = "data-table"
-            class = "table table-striped dt-responsive nowrap"
-            style = "width:100%" >
+            <table id="data-table" class="table table-striped dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>No</th>
                         <th>No Surat</th>
                         <th>NIK</th>
                         <th>Nama</th>
-                        <th>Masa Berlaku</th>
+                        <th>Alasan</th>
+                        <th>Klasifikasi</th>
+                        <th>Jenis Kepindahan</th>
+                        <th>Tanggal Pindah</th>
+                        <th>Alamat</th>
+                        <th>RT/RW</th>
+                        <th>Desa</th>
+                        <th>Kecamatan</th>
+                        <th>Kabupaten</th>
+                        <th>Provinsi</th>
                         <th>Tanggal Surat</th>
+                        <th>Anggota Pindah</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -36,12 +45,23 @@ function loadData(data) {
     for (var i = 0; i < data.length; i++) {
         var no = i + 1;
         html += `<tr>
+                    <td></td>
                     <td>` + no + `</td>
                     <td>` + data[i].no_surat + `</td>
                     <td>` + data[i].nik + `</td>
                     <td>` + data[i].nama + `</td>
-                    <td>` + data[i].masa_berlaku + `</td>
+                    <td>` + data[i].alasan + `</td>
+                    <td>` + data[i].klasifikasi + `</td>
+                    <td>` + data[i].jenis_kepindahan + `</td>
+                    <td>` + data[i].tanggal_pindah + `</td>
+                    <td>` + data[i].alamat_tujuan + `</td>
+                    <td>` + data[i].rt_tujuan + `</td>
+                    <td>` + data[i].desa_tujuan + `</td>
+                    <td>` + data[i].kecamatan_tujuan + `</td>
+                    <td>` + data[i].kabupaten_tujuan + `</td>
+                    <td>` + data[i].provinsi + `</td>
                     <td>` + data[i].tanggal_surat + `</td>
+                    <td><button type="button" class="btn btn-info btn-sm" onclick="selectPindah(` + data[i].id + `)" data-toggle="modal" data-target="#selectPindah">Lihat</button></td>
                     <td>                        
                         <button type="button" class="btn btn-warning btn-sm" onclick="rePrint(` + data[i].id + `)">Cetak Surat</button>
                     </td>
@@ -56,7 +76,7 @@ function loadData(data) {
         buttons: {
             buttons: [{
                 extend: 'excel',
-                title: 'Data Laporan Surat Domisili Warga',
+                title: 'Data Laporan Surat Domisili Perusahaan',
                 className: 'btn'
             }]
         },
@@ -85,7 +105,7 @@ $('form[id=formFilter]').submit(function () {
 
     $.ajax({
         type: "POST",
-        url: "./main/getDomisiliWarga",
+        url: "./main/getPindah",
         data: date,
         dataType: "JSON",
         success: function (data) {
@@ -96,16 +116,58 @@ $('form[id=formFilter]').submit(function () {
     });
 });
 
+function loadAnggota(data) {
+    var html = '';
+    html += `<table class="table table-bordered table-hover table-striped mb-4">
+                <thead>
+                    <tr>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Status</th>
+                        <th>HDK</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+    for (var i = 0; i < data.length; i++) {
+        html += `<tr>
+                    <td>` + data[i].nik + `</td>
+                    <td>` + data[i].nama + `</td>
+                    <td>` + data[i].jk + `</td>
+                    <td>` + data[i].status + `</td>
+                    <td>` + data[i].hdk + `</td>
+                </tr>`;
+    }
+    html += `    </tbody>
+            </table>`;
+
+    $('.table-anggota').html(html);
+}
+
+function selectPindah(id) {
+    $.ajax({
+        type: "POST",
+        url: "./main/getPindahAnggota",
+        data: {
+            id: id
+        },
+        dataType: "JSON",
+        success: function (data) {
+            loadAnggota(data);
+        }
+    });
+}
+
 function rePrint(id) {
     $.ajax({
         type: "POST",
-        url: "./main/rePrintWargaProcess",
+        url: "./main/rePrintPindahProcess",
         data: {
             id: id
         },
         success: function (data) {
             if (data == 'success') {
-                window.open('./main/printWarga');
+                window.open('./main/printPindah');
             }
         }
     });

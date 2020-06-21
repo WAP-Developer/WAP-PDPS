@@ -60,7 +60,7 @@
 
                 <div style="width:884px;">
                     <div class="jenis-surat">SURAT KETERANGAN DOMISILI USAHA</div>
-                    <div class="nomor-surat">Nomor: <?= $datadiri['no_surat'] ?></div>
+                    <div class="nomor-surat">Nomor: <?= $detail['no_surat'] ?></div>
                     <div class="isi">
                         <div class="pembukaan">
                             <p>Yang bertanda tangan dibawah ini Kepala Kelurahan Karangpawitan Kecamatan Karawang Barat
@@ -81,12 +81,12 @@
                                 <tr>
                                     <td width="210">NIK</td>
                                     <td>:</td>
-                                    <td><?= $datadiri['nik_umum'] ?></td>
+                                    <td><?= $datadiri['nik'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Jenis Kelamin</td>
                                     <td>:</td>
-                                    <td><?= $datadiri['jenis_kelamin'] ?></td>
+                                    <td><?= $datadiri['jk'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Pekerjaan</td>
@@ -107,21 +107,21 @@
                                 <tr>
                                     <td width="210">Jenis Usaha</td>
                                     <td>:</td>
-                                    <td><?= $datadiri['jenis_usaha'] ?></td>
+                                    <td><?= $detail['jenis_usaha'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210">Mulai Usaha</td>
                                     <td>:</td>
-                                    <td><?= tanggal_indonesia($datadiri['mulai_usaha']) ?></td>
+                                    <td><?= tanggal_indonesia($detail['mulai_usaha']) ?></td>
                                 </tr>
                                 <tr>
                                     <td width="210" style="vertical-align: top;">Alamat Usaha</td>
                                     <td style="vertical-align: top;">:</td>
-                                    <td><?= $datadiri['alamat_usaha'] ?></td>
+                                    <td><?= $detail['alamat_usaha'] ?></td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="pembukaan" style="margin-top: 10px;">Masa berlaku sampai dengan tanggal : <b><?= tanggal_indonesia($datadiri['masa_berlaku']) ?></b></div>
+                        <div class="pembukaan" style="margin-top: 10px;">Masa berlaku sampai dengan tanggal : <b><?= tanggal_indonesia($detail['masa_berlaku']) ?></b></div>
                         <div class="pembukaan" style="margin-top: 10px;">Demikian Surat Keterangan ini kami buat dengan
                             sebenarnya dan dapat dipergunakan sebagaimana mestinya. </div>
                     </div>
@@ -130,7 +130,7 @@
                 <table style="margin-top:100px;">
                     <tr>
                         <td width="439" align="center"></td>
-                        <td width="439" align="center">Karawang, <?= tanggal_indonesia($datadiri['tanggal_surat']) ?></td>
+                        <td width="439" align="center">Karawang, <?= tanggal_indonesia($detail['tanggal_surat']) ?></td>
                     </tr>
                     <tr>
                         <td width="439" align="center">Yang Bersangkutan,</td>
@@ -138,7 +138,7 @@
                     </tr>
                     <tr>
                         <td width="439" align="center">
-                            <div class="namattd">Nama Bersangkutan</div>
+                            <div class="namattd"><?= $datadiri['nama'] ?></div>
                         </td>
                         <td width="439" align="center">
                             <div class="namattd">Nama Bersangkutan</div>

@@ -2,6 +2,14 @@ $("#logout").click(function () {
     location.replace("./main/logout");
 });
 
+$(".tutup-sesi").click(function () {
+    location.replace("./main/logoff");
+});
+
+$(".profile").click(function () {
+    $('.body-switch').load('./main/profile');
+});
+
 $(document).ready(function () {
     $('.menus').click(function () {
 
@@ -79,6 +87,9 @@ $(document).ready(function () {
         } else if (report == "kematian") {
             $('#title-navbar').html("Kematian");
             $('.body-switch').load('./main/kematian');
+        } else if (report == "pindah") {
+            $('#title-navbar').html("Pindah");
+            $('.body-switch').load('./main/reportPindah');
         } else if (report == "sktm") {
             $('#title-navbar').html("SKTM");
             $('.body-switch').load('./main/sktm');

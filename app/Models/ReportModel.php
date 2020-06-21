@@ -41,6 +41,9 @@ class ReportModel extends Model
     function getDomisiliUsaha()
     {
         $builder = $this->db->table('domisili_usaha');
+        $builder->select('domisili_usaha.*, anggota_kk.nik, anggota_kk.nama, anggota_kk.tempat_lahir, anggota_kk.tanggal_lahir, anggota_kk.jk, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $builder->join('anggota_kk', 'anggota_kk.id = domisili_usaha.anggota_kk_id');
+        $builder->join('kk', 'kk.id=anggota_kk.kk_id');
         $builder->orderBy('id', 'DESC');
         return $builder->get()->getResultArray();
     }
@@ -48,7 +51,9 @@ class ReportModel extends Model
     function getDomisiliUsahaFilerRange($form, $to)
     {
         $builder = $this->db->table('domisili_usaha');
-        $builder->select('*');
+        $builder->select('domisili_usaha.*, anggota_kk.nik, anggota_kk.nama, anggota_kk.tempat_lahir, anggota_kk.tanggal_lahir, anggota_kk.jk, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $builder->join('anggota_kk', 'anggota_kk.id = domisili_usaha.anggota_kk_id');
+        $builder->join('kk', 'kk.id=anggota_kk.kk_id');
         $builder->where("tanggal_surat between '$form' AND '$to'");
         $builder->orderBy('id', 'DESC');
         return $builder->get()->getResultArray();
@@ -57,8 +62,10 @@ class ReportModel extends Model
     function getDomisiliUsahaFilerSingle($date)
     {
         $builder = $this->db->table('domisili_usaha');
-        $builder->select('*');
-        $builder->where("tanggal_surat='$date'");
+        $builder->select('domisili_usaha.*, anggota_kk.nik, anggota_kk.nama, anggota_kk.tempat_lahir, anggota_kk.tanggal_lahir, anggota_kk.jk, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $builder->join('anggota_kk', 'anggota_kk.id = domisili_usaha.anggota_kk_id');
+        $builder->join('kk', 'kk.id=anggota_kk.kk_id');
+        $builder->where("tanggal_surat = '$date'");
         $builder->orderBy('id', 'DESC');
         return $builder->get()->getResultArray();
     }
@@ -121,6 +128,38 @@ class ReportModel extends Model
         $builder = $this->db->table('kematian');
         $builder->select('kematian.*, anggota_kk.nik, anggota_kk.nama, anggota_kk.tempat_lahir, anggota_kk.tanggal_lahir, anggota_kk.jk, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
         $builder->join('anggota_kk', 'anggota_kk.id = kematian.anggota_kk_id');
+        $builder->join('kk', 'kk.id=anggota_kk.kk_id');
+        $builder->where("tanggal_surat = '$tanggal'");
+        $builder->orderBy('id', 'DESC');
+        return $builder->get()->getResultArray();
+    }
+
+    function getPindah()
+    {
+        $builder = $this->db->table('pindah');
+        $builder->select('pindah.*, anggota_kk.nik, anggota_kk.nama, anggota_kk.tempat_lahir, anggota_kk.tanggal_lahir, anggota_kk.jk, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $builder->join('anggota_kk', 'anggota_kk.id = pindah.anggota_kk_id');
+        $builder->join('kk', 'kk.id=anggota_kk.kk_id');
+        $builder->orderBy('id', 'DESC');
+        return $builder->get()->getResultArray();
+    }
+
+    function getPindahFilerRange($form, $to)
+    {
+        $builder = $this->db->table('pindah');
+        $builder->select('pindah.*, anggota_kk.nik, anggota_kk.nama, anggota_kk.tempat_lahir, anggota_kk.tanggal_lahir, anggota_kk.jk, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $builder->join('anggota_kk', 'anggota_kk.id = pindah.anggota_kk_id');
+        $builder->join('kk', 'kk.id=anggota_kk.kk_id');
+        $builder->where("tanggal_surat between '$form' AND '$to'");
+        $builder->orderBy('id', 'DESC');
+        return $builder->get()->getResultArray();
+    }
+
+    function getPindahFilerSingle($tanggal)
+    {
+        $builder = $this->db->table('pindah');
+        $builder->select('pindah.*, anggota_kk.nik, anggota_kk.nama, anggota_kk.tempat_lahir, anggota_kk.tanggal_lahir, anggota_kk.jk, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $builder->join('anggota_kk', 'anggota_kk.id = pindah.anggota_kk_id');
         $builder->join('kk', 'kk.id=anggota_kk.kk_id');
         $builder->where("tanggal_surat = '$tanggal'");
         $builder->orderBy('id', 'DESC');

@@ -6,20 +6,36 @@ class Main extends BaseController
 {
     public function index()
     {
+        if ($this->session->get('role') == 'employe') {
+            $fetchEmploye = $this->employes->where('id', $this->session->get('id'))->first();
+            if ($fetchEmploye['password'] == md5('12345678')) {
+                return redirect()->to('/login/confirmPassword');
+            }
+        }
+
+        if (!$this->session->get('password')) {
+            return redirect()->to('/lockscreen');
+        }
+
         if (!$this->session->get('name')) {
+
             $this->session->setFlashdata('notif', '<div class="alert alert-danger mb-4" style="margin-top: -30px;" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg></button>
-                Anda Belum Login, Silakan Login Dulu. </button>
-            </div>');
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg></button>
+            Anda Belum Login, Silakan Login Dulu. </button>
+        </div>');
             return redirect()->to('/');
         }
+
+        $fetchData = $this->employes->where('id', $this->session->get('id'))->first();
+
         $data = [
             'title' => 'Dashboard',
             'name' => $this->session->get('name'),
             'role' => $this->session->get('role'),
+            'avatar' => $fetchData['foto']
         ];
 
         echo view('template/header', $data);
@@ -432,21 +448,8 @@ class Main extends BaseController
         $mulaiUsaha = $this->request->getPost('mulai');
         $alamatUsaha = $this->request->getPost('alamat');
 
-        $queryAnggota = $this->db->table('anggota_kk');
-        $queryAnggota->select('anggota_kk.*, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
-        $queryAnggota->join('kk', 'kk.id=anggota_kk.kk_id');
-        $queryAnggota->where('anggota_kk.id', $id);
-
-        $fetchAnggota = $queryAnggota->get()->getRowArray();
-
         $data = [
-            'nik_umum' => $fetchAnggota['nik'],
-            'nama' => $fetchAnggota['nama'],
-            'tempat_lahir' => $fetchAnggota['tempat_lahir'],
-            'tanggal_lahir' => $fetchAnggota['tanggal_lahir'],
-            'jenis_kelamin' => $fetchAnggota['jk'],
-            'pekerjaan' => $fetchAnggota['pekerjaan'],
-            'alamat' => $fetchAnggota['alamat'] . " RT/RW. " . $fetchAnggota['rtrw'] . " Desa. " . $fetchAnggota['desa'] . " Kecamatan. " . $fetchAnggota['kecamatan'] . " Kabupaten. " . $fetchAnggota['kabupaten'] . " " . $fetchAnggota['kodepos'],
+            'anggota_kk_id' => $id,
             'no_surat' => $nosurat,
             'jenis_usaha' => $jenisUsaha,
             'mulai_usaha' => $mulaiUsaha,
@@ -458,28 +461,34 @@ class Main extends BaseController
             'updated_at' => date("Y-m-d H:i:s")
         ];
 
-        if ($id) {
-            $usahaDB = $this->db->table("domisili_usaha");
-            $usahaDB->insert($data);
+        $usahaDB = $this->db->table("domisili_usaha");
+        $usahaDB->insert($data);
 
-            $fetchUsaha = $this->db->query("SELECT * FROM domisili_usaha WHERE no_surat='$nosurat'");
-            $usaha = $fetchUsaha->getRowArray();
+        $fetchUsaha = $this->db->query("SELECT * FROM domisili_usaha WHERE no_surat='$nosurat'");
+        $usaha = $fetchUsaha->getRowArray();
 
-            $this->session->set('idUsaha', $usaha['id']);
+        $this->session->set('idUsaha', $usaha['id']);
+        $this->session->set('idAnggota', $usaha['anggota_kk_id']);
 
-            echo "success";
-        }
+        echo "success";
     }
 
     public function printUsaha()
     {
         $id = $this->session->get('idUsaha');
+        $idAnggota = $this->session->get('idAnggota');
+
+        $checkAnggota = $this->db->table('anggota_kk');
+        $checkAnggota->select('anggota_kk.*, kk.alamat, kk.rtrw, kk.desa, kk.kecamatan, kk.kabupaten, kk.kodepos, kk.provinsi');
+        $checkAnggota->join('kk', 'kk.id=anggota_kk.kk_id');
+        $checkAnggota->where('anggota_kk.id', $idAnggota);
 
         $fetchUsaha = $this->db->query("SELECT * FROM domisili_usaha WHERE id='$id'");
 
         $data = [
             'title' => "Cetak Domisili Usaha",
-            'datadiri' => $fetchUsaha->getRowArray()
+            'detail' => $fetchUsaha->getRowArray(),
+            'datadiri' => $checkAnggota->get()->getRowArray()
         ];
 
         if ($fetchUsaha->getRowArray()) {
@@ -569,6 +578,7 @@ class Main extends BaseController
         $nikMeninggal = $fetchNikMeninggal->getRowArray();
 
         $hari = $this->request->getPost('hari');
+        $bin = $this->request->getPost('bin');
         $tanggal = $this->request->getPost('tanggal');
         $jam = $this->request->getPost('jam');
         $lokasi = $this->request->getPost('lokasi');
@@ -579,6 +589,7 @@ class Main extends BaseController
                 'no_surat' => $nosurat,
                 'anggota_kk_id' => $idPelapor,
                 'nik_meninggal' => $nikMeninggal['nik'],
+                'bin' => $bin,
                 'hari' => $hari,
                 'tanggal' => $tanggal,
                 'jam' => $jam,
@@ -831,6 +842,20 @@ class Main extends BaseController
         echo json_encode($check);
     }
 
+    public function rePrintCompProcess()
+    {
+        $id = $this->request->getPost('id');
+
+        $builder = $this->db->table('domisili_perusahaan');
+        $fetchComp = $builder->where('id', $id);
+        $comp = $fetchComp->get()->getRowArray();
+
+        $this->session->set('idComp', $id);
+        $this->session->set('idAnggota', $comp['anggota_kk_id']);
+
+        echo 'success';
+    }
+
     public function domisiliUsaha()
     {
         echo view('admin/report/domisiliUsaha');
@@ -848,6 +873,20 @@ class Main extends BaseController
             $check = $this->report->getDomisiliUsahaFilerRange(substr($tanggal, 0, 10), substr($tanggal, 14));
         }
         echo json_encode($check);
+    }
+
+    public function rePrintUsahaProcess()
+    {
+        $id = $this->request->getPost('id');
+
+        $builder = $this->db->table('domisili_usaha');
+        $fetchComp = $builder->where('id', $id);
+        $comp = $fetchComp->get()->getRowArray();
+
+        $this->session->set('idUsaha', $id);
+        $this->session->set('idAnggota', $comp['anggota_kk_id']);
+
+        echo 'success';
     }
 
     public function domisiliWarga()
@@ -869,6 +908,20 @@ class Main extends BaseController
         echo json_encode($check);
     }
 
+    public function rePrintWargaProcess()
+    {
+        $id = $this->request->getPost('id');
+
+        $builder = $this->db->table('domisili_warga');
+        $fetchWarga = $builder->where('id', $id);
+        $warga = $fetchWarga->get()->getRowArray();
+
+        $this->session->set('idWarga', $id);
+        $this->session->set('idAnggota', $warga['anggota_kk_id']);
+
+        echo 'success';
+    }
+
     public function kematian()
     {
         echo view('admin/report/kematian');
@@ -886,6 +939,64 @@ class Main extends BaseController
             $check = $this->report->getKematianFilerRange(substr($tanggal, 0, 10), substr($tanggal, 14));
         }
         echo json_encode($check);
+    }
+
+    public function rePrintKematianProcess()
+    {
+        $id = $this->request->getPost('id');
+
+        $builder = $this->db->table('kematian');
+        $fetchComp = $builder->where('id', $id);
+        $comp = $fetchComp->get()->getRowArray();
+
+        $this->session->set('idKematian', $id);
+        $this->session->set('idAnggota', $comp['anggota_kk_id']);
+        $this->session->set('nikMeninggal', $comp['nik_meninggal']);
+
+        echo 'success';
+    }
+
+    public function reportPindah()
+    {
+        echo view('admin/report/pindah');
+    }
+
+    public function getPindah()
+    {
+        $tanggal = $this->request->getPost('date');
+
+        if ($tanggal == "") {
+            $check = $this->report->getPindah();
+        } else if (strlen($tanggal) == 10) {
+            $check = $this->report->getPindahFilerSingle($tanggal);
+        } else {
+            $check = $this->report->getPindahFilerRange(substr($tanggal, 0, 10), substr($tanggal, 14));
+        }
+        echo json_encode($check);
+    }
+
+    public function getPindahAnggota()
+    {
+        $id = $this->request->getPost('id');
+
+        $builder = $this->db->table('pindah_anggota');
+        $getAnggota = $builder->where('pindah_id', $id);
+
+        echo json_encode($getAnggota->get()->getResultArray());
+    }
+
+    public function rePrintPindahProcess()
+    {
+        $id = $this->request->getPost('id');
+
+        $builder = $this->db->table('pindah');
+        $fetchPindah = $builder->where('id', $id);
+        $pindah = $fetchPindah->get()->getRowArray();
+
+        $this->session->set('idPindah', $id);
+        $this->session->set('idAg', $pindah['anggota_kk_id']);
+
+        echo 'success';
     }
 
     public function sktm()
@@ -907,6 +1018,101 @@ class Main extends BaseController
         echo json_encode($check);
     }
 
+    public function rePrintSktmProcess()
+    {
+        $id = $this->request->getPost('id');
+
+        $builder = $this->db->table('sktm');
+        $fetchSktm = $builder->where('id', $id);
+        $sktm = $fetchSktm->get()->getRowArray();
+
+        $this->session->set('idSktm', $id);
+        $this->session->set('idAnggota', $sktm['anggota_kk_id']);
+
+        echo 'success';
+    }
+
+    // ========================================================
+    // Profile
+    // ========================================================
+
+    public function profile()
+    {
+        $data = [
+            'profile' => $this->employes->where('id', $this->session->get('id'))->first()
+        ];
+        echo view('admin/profile', $data);
+    }
+
+    public function processUploadAvatar()
+    {
+
+        $validated = $this->validate([
+            'avatar' => 'uploaded[avatar]|mime_in[avatar,image/jpg,image/jpeg,image/gif,image/png]|max_size[avatar,2048]'
+        ]);
+
+        if ($validated == FALSE) {
+            echo 'Gagal';
+        } else {
+
+            $getData = $this->employes->where('id', $this->session->get('id'))->first();
+
+            if ($getData['foto'] != "default.png") {
+                unlink(FCPATH . '/assets/img/avatar/' . $getData['foto']);
+            }
+
+            $avatar = $this->request->getFile('avatar');
+            $name = $avatar->getRandomName();
+            $avatar->move(ROOTPATH . 'public/assets/img/avatar', $name);
+
+            $data = [
+                'foto' => $avatar->getName()
+            ];
+
+            $this->employes->update($this->session->get('id'), $data);
+
+            echo "success";
+        }
+    }
+
+    public function processUploadTtd()
+    {
+
+        $validated = $this->validate([
+            'uploadttd' => 'uploaded[uploadttd]|mime_in[uploadttd,image/jpg,image/jpeg,image/gif,image/png]|max_size[uploadttd,2048]'
+        ]);
+
+        if ($validated == FALSE) {
+            echo 'Gagal';
+        } else {
+
+            $getData = $this->employes->where('id', $this->session->get('id'))->first();
+
+            if ($getData['ttd']) {
+                unlink(FCPATH . '/assets/img/ttd/' . $getData['foto']);
+            }
+
+            $ttd = $this->request->getFile('uploadttd');
+            $name = $ttd->getRandomName();
+            $ttd->move(ROOTPATH . 'public/assets/img/ttd', $name);
+
+            $data = [
+                'ttd' => $ttd->getName()
+            ];
+
+            $this->employes->update($this->session->get('id'), $data);
+
+            echo "success";
+        }
+    }
+
+    public function getAvatarEmploye()
+    {
+        $getData = $this->employes->where('id', $this->session->get('id'))->first();
+
+        echo json_encode($getData);
+    }
+
     // ========================================================
     // Logout
     // ========================================================
@@ -921,5 +1127,12 @@ class Main extends BaseController
             $this->session->remove('nip');
             return redirect()->to('/');
         endif;
+    }
+
+    public function logoff()
+    {
+        $this->session->remove('password');
+
+        return redirect()->to('/lockscreen');
     }
 }

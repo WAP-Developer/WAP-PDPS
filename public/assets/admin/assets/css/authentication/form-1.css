@@ -257,6 +257,48 @@ body {
   background-position-y: center;
 }
 
+.form-image .off-image {
+  background-image: url(/assets/img/logoff.svg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 75%;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.form-image .admin-image {
+  background-image: url(/assets/img/admin.svg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 75%;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.form-image .conf-image {
+  background-image: url(/assets/img/confirm.svg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 75%;
+  background-position-x: center;
+  background-position-y: center;
+}
+
 @media (max-width: 991px) {
   .form-form {
     width: 100%;

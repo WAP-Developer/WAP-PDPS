@@ -41,7 +41,7 @@ function loadData(data) {
                     <td>` + data[i].nama + `</td>
                     <td>` + data[i].tanggal_surat + `</td>
                     <td>                        
-                        <button type="button" class="btn btn-warning btn-sm" data-id="">Cetak Surat</button>
+                        <button type="button" class="btn btn-warning btn-sm" onclick="rePrint(` + data[i].id + `)">Cetak Surat</button>
                     </td>
                 </tr>`;
     }
@@ -93,3 +93,18 @@ $('form[id=formFilter]').submit(function () {
         }
     });
 });
+
+function rePrint(id) {
+    $.ajax({
+        type: "POST",
+        url: "./main/rePrintSktmProcess",
+        data: {
+            id: id
+        },
+        success: function (data) {
+            if (data == 'success') {
+                window.open('./main/printSktm');
+            }
+        }
+    });
+}

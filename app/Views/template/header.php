@@ -13,8 +13,6 @@
     <link href="<?= base_url('assets/admin'); ?>/assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
 
-    <link rel="stylesheet" href="<?= base_url('assets/main'); ?>/css/font-awesome.min.css">
-
     <link href="<?= base_url('assets/admin'); ?>/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url('assets/admin'); ?>/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url('assets/admin'); ?>/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />

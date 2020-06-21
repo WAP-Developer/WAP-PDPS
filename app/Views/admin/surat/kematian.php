@@ -149,15 +149,19 @@
                                     <input type="text" class="form-control" id="namaMeninggal" disabled>
                                 </div>
                                 <div class="form-group">
+                                    <label for="bin">Bin/Binti</label>
+                                    <input type="text" class="form-control" id="bin" name="bin" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="hubungan">Hubungan Pelapor</label>
                                     <input type="text" class="form-control" id="hubungan" name="hubungan" autocomplete="off" required>
                                 </div>
+                            </div>
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="hari">Hari</label>
                                     <input type="text" class="form-control" id="hari" name="hari" autocomplete="off" required>
                                 </div>
-                            </div>
-                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal</label>
                                     <input id="basicFlatpickr" class="form-control flatpickr flatpickr-input" type="text" id="tanggal" name="tanggal" placeholder="Pilih Tanggal.." readonly="readonly" required>

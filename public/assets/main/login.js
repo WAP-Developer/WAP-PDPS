@@ -7,7 +7,7 @@ $(document).ready(function () {
 // Karyawan
 function loginEmploye() {
     checkValidation();
-}
+};
 
 function checkValidation() {
     var nipLength = $("#formNip").val().length;
@@ -42,13 +42,13 @@ function checkValidation() {
 
 function loginCheck() {
     var datalogin = {
-        nip: $("#formNip").val(),
+        username: $("#formNip").val(),
         password: $("#password").val()
     };
 
     $.ajax({
         type: "POST",
-        url: "./",
+        url: "./login/employeprocess",
         data: datalogin,
         success: function (aksi) {
             if (aksi == 'success') {
@@ -70,9 +70,7 @@ function loginCheck() {
             }
         }
     });
-    return false;
-
-}
+};
 
 // Admin
 
@@ -145,6 +143,65 @@ function loginAdminCheck() {
     });
     return false;
 }
+
+$("form[id='formLock']").submit(function () {
+    var datalogin = $('#formLock').serialize();
+    $.ajax({
+        type: "POST",
+        url: './login/lockProcess',
+        data: datalogin,
+        success: function (aksi) {
+            if (aksi == 'success') {
+                var type = "success";
+                var notif = "Login Berhasil"
+                failedNotif(notif, type);
+
+                setTimeout(function () {
+                    location.replace("./dashboard");
+                }, 3000);
+            } else if (aksi = "passwordErrror") {
+                var type = "error";
+                var notif = "Password Yang Anda Masukan Salah"
+                failedNotif(notif, type);
+            }
+        }
+    });
+});
+
+// Confirm 
+$("form[id='formComfirm']").submit(function () {
+    var dataConf = $('#formComfirm').serialize();
+    console.log(dataConf);
+    $.ajax({
+        type: "POST",
+        url: './confirmPasswordProcess',
+        data: dataConf,
+        success: function (data) {
+            console.log(data);
+            if (data == 'success') {
+                var type = "success";
+                var notif = "Kata Sandi Berhasil Diubah"
+                failedNotif(notif, type);
+
+                setTimeout(function () {
+                    location.replace("/dashboard");
+                }, 1000);
+            } else if (data == 'notDefault') {
+                var type = "error";
+                var notif = "Kata Sandi Tidak Boleh Default"
+                failedNotif(notif, type);
+            } else if (data == "notSame") {
+                var type = "error";
+                var notif = "Kata Sandi Tidak Cocok"
+                failedNotif(notif, type);
+            } else if (data == "notMin") {
+                var type = "error";
+                var notif = "Kata Sandi Minimal 8 Karakter"
+                failedNotif(notif, type);
+            }
+        }
+    });
+});
 
 // Notif
 function failedNotif(notif, type) {
