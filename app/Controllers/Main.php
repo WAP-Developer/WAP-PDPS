@@ -51,6 +51,50 @@ class Main extends BaseController
     }
 
     // ==========================================================
+    // Place
+    // ==========================================================
+
+    public function place()
+    {
+        $desa = $this->db->table("detail_desa");
+        $desaResult = $desa->get()->getRowArray();
+        $data = [
+            'place' => $desaResult
+        ];
+        echo view('admin/place', $data);
+    }
+
+    public function placeProcess()
+    {
+        $alamat = $this->request->getPost('alamat');
+        $kelurahan = $this->request->getPost('kelurahan');
+        $kecamatan = $this->request->getPost('kecamatan');
+        $kabupaten = $this->request->getPost('kabupaten');
+        $provinsi = $this->request->getPost('provinsi');
+        $kodepos = $this->request->getPost('kodepos');
+
+        $data = [
+            'alamat' => $alamat,
+            'kab' => $kabupaten,
+            'kec' => $kecamatan,
+            'kel' => $kelurahan,
+            'kodepos' => $kodepos,
+            'prov' => $provinsi
+        ];
+
+        $desa = $this->db->table("detail_desa");
+        $desaResult = $desa->get()->getRowArray();
+        if ($desaResult) {
+            $desa->where('id', $desaResult['id']);
+            $desa->update($data);
+        } else {
+            $desa->insert($data);
+        }
+
+        echo 'success';
+    }
+
+    // ==========================================================
     // Penduduk
     // ==========================================================
 
@@ -419,10 +463,17 @@ class Main extends BaseController
 
         $fetchPerusahaan = $this->db->query("SELECT * FROM domisili_perusahaan WHERE id='$id'");
 
+        $desa = $this->db->table("detail_desa");
+        $desaResult = $desa->get()->getRowArray();
+
+        $lurah = $this->employes->where('jabatan', 'Lurah')->first();
+
         $data = [
             'title' => "Cetak Domisili Perusahaan",
             'datadiri' => $checkAnggota->get()->getRowArray(),
-            'detail' => $fetchPerusahaan->getRowArray()
+            'detail' => $fetchPerusahaan->getRowArray(),
+            'detaildesa' => $desaResult,
+            'lurah' => $lurah
         ];
 
         if ($fetchPerusahaan->getRowArray()) {
@@ -485,10 +536,17 @@ class Main extends BaseController
 
         $fetchUsaha = $this->db->query("SELECT * FROM domisili_usaha WHERE id='$id'");
 
+        $desa = $this->db->table("detail_desa");
+        $desaResult = $desa->get()->getRowArray();
+
+        $lurah = $this->employes->where('jabatan', 'Lurah')->first();
+
         $data = [
             'title' => "Cetak Domisili Usaha",
             'detail' => $fetchUsaha->getRowArray(),
-            'datadiri' => $checkAnggota->get()->getRowArray()
+            'datadiri' => $checkAnggota->get()->getRowArray(),
+            'detaildesa' => $desaResult,
+            'lurah' => $lurah
         ];
 
         if ($fetchUsaha->getRowArray()) {
@@ -547,10 +605,17 @@ class Main extends BaseController
 
         $fetchWarga = $this->db->query("SELECT * FROM domisili_warga WHERE id='$id'");
 
+        $desa = $this->db->table("detail_desa");
+        $desaResult = $desa->get()->getRowArray();
+
+        $lurah = $this->employes->where('jabatan', 'Lurah')->first();
+
         $data = [
             'title' => "Cetak Domisili Warga",
             'datadiri' => $checkAnggota->get()->getRowArray(),
-            'detail' => $fetchWarga->getRowArray()
+            'detail' => $fetchWarga->getRowArray(),
+            'detaildesa' => $desaResult,
+            'lurah' => $lurah
         ];
 
         if ($fetchWarga->getRowArray()) {
@@ -633,11 +698,18 @@ class Main extends BaseController
 
         $fetchKematian = $this->db->query("SELECT * FROM kematian WHERE id='$id'");
 
+        $desa = $this->db->table("detail_desa");
+        $desaResult = $desa->get()->getRowArray();
+
+        $lurah = $this->employes->where('jabatan', 'Lurah')->first();
+
         $data = [
             'title' => "Cetak Keterangan Kematian",
             'datadiri' => $checkPelapor->get()->getRowArray(),
             'datameninggal' => $checkMeninggal->get()->getRowArray(),
-            'detail' => $fetchKematian->getRowArray()
+            'detail' => $fetchKematian->getRowArray(),
+            'detaildesa' => $desaResult,
+            'lurah' => $lurah
         ];
 
         if ($fetchKematian->getRowArray()) {
@@ -746,11 +818,18 @@ class Main extends BaseController
 
         $detailAnggota = $this->db->query("SELECT * FROM pindah_anggota WHERE pindah_id='$id'");
 
+        $desa = $this->db->table("detail_desa");
+        $desaResult = $desa->get()->getRowArray();
+
+        $lurah = $this->employes->where('jabatan', 'Lurah')->first();
+
         $data = [
             'title' => "Cetak Keterangan Pindah",
             'datadiri' => $checkAnggota->get()->getRowArray(),
             'detail' => $fetchPindah->getRowArray(),
-            'detailAnggota' => $detailAnggota->getResultArray()
+            'detailAnggota' => $detailAnggota->getResultArray(),
+            'detaildesa' => $desaResult,
+            'lurah' => $lurah
         ];
 
         if ($fetchPindah->getRowArray()) {
@@ -808,10 +887,17 @@ class Main extends BaseController
 
         $fetchSktm = $this->db->query("SELECT * FROM sktm WHERE id='$id'");
 
+        $desa = $this->db->table("detail_desa");
+        $desaResult = $desa->get()->getRowArray();
+
+        $lurah = $this->employes->where('jabatan', 'Lurah')->first();
+
         $data = [
             'title' => "Cetak Domisili Warga",
             'datadiri' => $checkAnggota->get()->getRowArray(),
-            'detail' => $fetchSktm->getRowArray()
+            'detail' => $fetchSktm->getRowArray(),
+            'detaildesa' => $desaResult,
+            'lurah' => $lurah
         ];
 
         if ($fetchSktm->getRowArray()) {

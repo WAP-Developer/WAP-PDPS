@@ -25,6 +25,10 @@ $(document).ready(function () {
             $(".submenu").removeClass('show');
             $('#title-navbar').html("Dashboard");
             $('.body-switch').load('./main/dashboard');
+        } else if (menu == "detaildesa") {
+            $(".submenu").removeClass('show');
+            $('#title-navbar').html("Detail Tempat");
+            $('.body-switch').load('./main/place');
         } else if (menu == "penduduk") {
             $(".submenu").removeClass('show');
             $('#title-navbar').html("Penduduk");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 21, 2020 at 04:11 PM
+-- Generation Time: Jun 24, 2020 at 09:16 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -90,15 +90,21 @@ INSERT INTO `anggota_kk` (`id`, `kk_id`, `nama`, `nik`, `jk`, `tempat_lahir`, `t
 --
 
 CREATE TABLE `detail_desa` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL,
   `alamat` text NOT NULL,
   `kab` varchar(20) NOT NULL,
   `kec` varchar(30) NOT NULL,
   `kel` varchar(30) NOT NULL,
   `prov` varchar(50) NOT NULL,
-  `lurah` varchar(50) NOT NULL,
-  `nip` varchar(50) NOT NULL
+  `kodepos` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `detail_desa`
+--
+
+INSERT INTO `detail_desa` (`id`, `alamat`, `kab`, `kec`, `kel`, `prov`, `kodepos`) VALUES
+(2, 'Jalan Raya Makmurjaya No. 14', 'Karawang', 'Jayakerta', 'Makmurjaya', 'Jawa Barat', '41351');
 
 -- --------------------------------------------------------
 
@@ -204,7 +210,7 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`id`, `nip`, `nama`, `jabatan`, `password`, `foto`, `ttd`, `created_at`, `updated_at`) VALUES
-(1, '15645584756', 'Tengku Fadilah', 'CEO', '25d55ad283aa400af464c76d713c07ad', 'default.png', '', '2020-04-14', '2020-06-15'),
+(1, '15645584756', 'Tengku Fadilah', 'Lurah', '25d55ad283aa400af464c76d713c07ad', 'default.png', '', '2020-04-14', '2020-06-15'),
 (2, '54654544551225', 'Aldi Wiguna', 'Sekretaris', '4fc3c257e0d226cb146d9990af31b021', '1592754683_338e891edb720efcb6da.jpg', '1592751956_0a948b0fa4b34edd1496.jpeg', '2020-06-20', '2020-06-21');
 
 -- --------------------------------------------------------
@@ -441,6 +447,12 @@ ALTER TABLE `anggota_kk`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `detail_desa`
+--
+ALTER TABLE `detail_desa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `domisili_perusahaan`
 --
 ALTER TABLE `domisili_perusahaan`
@@ -462,7 +474,7 @@ ALTER TABLE `domisili_warga`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kematian`

@@ -46,10 +46,10 @@
                         </td>
                         <td>
                             <div class="kop-title">
-                                PEMERINTAH KABUPATEN KARAWANG <br>
-                                KECAMATAN KARAWANG BARAT <br>
-                                <b>KELURAHAN KARANGPAWITAN</b> <br>
-                                Jl. Malabar No. 19F Karawang 41815
+                                PEMERINTAH KABUPATEN <?= strtoupper($detaildesa['kab']); ?> <br>
+                                KECAMATAN <?= strtoupper($detaildesa['kec']); ?> <br>
+                                <b>KELURAHAN <?= strtoupper($detaildesa['kel']); ?></b> <br>
+                                <?= $detaildesa['alamat']; ?> Kode Pos <?= $detaildesa['kodepos']; ?>
                             </div>
                         </td>
                     </tr>
@@ -173,19 +173,19 @@
                     </tr>
                     <tr>
                         <td width="439" align="center"></td>
-                        <td width="439" align="center">Lurah Karangpawitan</td>
+                        <td width="439" align="center">Lurah <?= $detaildesa['kel']; ?></td>
                     </tr>
                     <tr>
                         <td width="439" align="center">
                             <div class="namattd"></div>
                         </td>
                         <td width="439" align="center">
-                            <div class="namattd">Nama Bersangkutan</div>
+                            <div class="namattd"><?= $lurah['nama'] ?></div>
                         </td>
                     </tr>
                     <tr>
                         <td width="439" align="center"></td>
-                        <td width="439" align="center"><b>NIP. 1516564165156165</b></td>
+                        <td width="439" align="center"><b>NIP. <?= $lurah['nip'] ?></b></td>
                     </tr>
                 </table>
 
