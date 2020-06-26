@@ -145,7 +145,7 @@
                                 <tr>
                                     <td width="240">5. Rencana Tanggal Pindah</td>
                                     <td>:</td>
-                                    <td><?= $detail['tanggal_pindah'] ?></td>
+                                    <td><?= date('d-m-Y', strtotime($detail['tanggal_pindah'])) ?></td>
                                 </tr>
                                 <tr>
                                     <td width="240">6. Keluarga Yang Pindah</td>

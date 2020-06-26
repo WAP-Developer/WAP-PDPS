@@ -41,35 +41,43 @@ function checkValidation() {
 }
 
 function loginCheck() {
-    var datalogin = {
-        username: $("#formNip").val(),
-        password: $("#password").val()
-    };
+    var nip = $('#formNip').val();
 
-    $.ajax({
-        type: "POST",
-        url: "./login/employeprocess",
-        data: datalogin,
-        success: function (aksi) {
-            if (aksi == 'success') {
-                var type = "success";
-                var notif = "Login Berhasil"
-                failedNotif(notif, type);
+    if (nip != 18) {
+        var type = "error";
+        var notif = "NIP Harus 18 Angka"
+        failedNotif(notif, type);
+    } else {
+        var datalogin = {
+            username: $("#formNip").val(),
+            password: $("#password").val()
+        };
 
-                setTimeout(function () {
-                    location.replace("./dashboard");
-                }, 3000);
-            } else if (aksi == 'nipError') {
-                var type = "error";
-                var notif = "NIP Tidak Ditemukan"
-                failedNotif(notif, type);
-            } else if (aksi = "passwordErrror") {
-                var type = "error";
-                var notif = "Password Yang Anda Masukan Salah"
-                failedNotif(notif, type);
+        $.ajax({
+            type: "POST",
+            url: "./login/employeprocess",
+            data: datalogin,
+            success: function (aksi) {
+                if (aksi == 'success') {
+                    var type = "success";
+                    var notif = "Login Berhasil"
+                    failedNotif(notif, type);
+
+                    setTimeout(function () {
+                        location.replace("./dashboard");
+                    }, 3000);
+                } else if (aksi == 'nipError') {
+                    var type = "error";
+                    var notif = "NIP Tidak Ditemukan"
+                    failedNotif(notif, type);
+                } else if (aksi = "passwordErrror") {
+                    var type = "error";
+                    var notif = "Password Yang Anda Masukan Salah"
+                    failedNotif(notif, type);
+                }
             }
-        }
-    });
+        });
+    }
 };
 
 // Admin

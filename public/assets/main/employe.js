@@ -52,31 +52,49 @@ $('#html5-extension').DataTable({
 // Proses Add Employe
 
 $("form[id='formAddEmploye']").submit(function () {
-    var dataEmploye = $('#formAddEmploye').serialize();
+    var nip = $('#nip').val();
 
-    $.ajax({
-        type: "POST",
-        url: './main/addEmploye',
-        data: dataEmploye,
-        success: function (data) {
-            if (data == 'success') {
-                swal(
-                    'Berhasil!',
-                    'Data Berhasil di Tambahkan.',
-                    'success'
-                );
-                $('#title-navbar').html("Karyawan");
-                $('.body-switch').load('./main/employe');
-            } else {
-                swal({
-                    title: 'Gagal!',
-                    text: "NIP anda sudah terdaftar",
-                    type: 'error',
-                    padding: '2em'
-                })
+    if (nip != 18) {
+        const toast = swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            padding: '2em'
+        });
+
+        toast({
+            type: 'error',
+            title: 'NIP Harus 18 Angka',
+            padding: '2em',
+        });
+    } else {
+        var dataEmploye = $('#formAddEmploye').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: './main/addEmploye',
+            data: dataEmploye,
+            success: function (data) {
+                if (data == 'success') {
+                    swal(
+                        'Berhasil!',
+                        'Data Berhasil di Tambahkan.',
+                        'success'
+                    );
+                    $('#title-navbar').html("Karyawan");
+                    $('.body-switch').load('./main/employe');
+                } else {
+                    swal({
+                        title: 'Gagal!',
+                        text: "NIP anda sudah terdaftar",
+                        type: 'error',
+                        padding: '2em'
+                    })
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 // =====================================
