@@ -87,6 +87,7 @@ $("form[id='formAddAnggota']").submit(function () {
                 });
                 $('#addAnggota').modal('hide');
                 load_data();
+                document.getElementById("formAddAnggota").reset();
             } else if (aksi == 'failed') {
                 Snackbar.show({
                     text: 'Gagal! NIK Sudah Terdaftar.',

@@ -202,6 +202,7 @@ $("form[id='formAddAnggota']").submit(function () {
                 $('#addAnggota').modal('hide');
                 $("#selesai").prop('disabled', false);
                 load_data();
+                document.getElementById("formAddAnggota").reset();
             } else if (aksi == 'failed') {
                 Snackbar.show({
                     text: 'Gagal! NIK Sudah Terdaftar.',

@@ -64,27 +64,27 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="alamat">Alamat</label>
-                                    <textarea class="form-control" id="alamat" rows="3" name="alamat" required></textarea>
+                                    <textarea class="form-control" id="alamat" rows="3" name="alamat" required><?= $place['alamat'] ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="keluarahn">Kelurahan</label>
-                                    <input type="text" class="form-control" id="keluarahn" name="kelurahan" autocomplete="off" required>
+                                    <input type="text" class="form-control" id="keluarahn" name="kelurahan" value="<?= $place['kel'] ?>" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="kecamatan">Kecamatan</label>
-                                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" autocomplete="off" required>
+                                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="<?= $place['kec'] ?>" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="kabupaten">Kabupaten</label>
-                                    <input type="text" class="form-control" id="kabupaten" name="kabupaten" autocomplete="off" required>
+                                    <input type="text" class="form-control" id="kabupaten" name="kabupaten" value="<?= $place['kab'] ?>" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="provinsi">Provinsi</label>
-                                    <input type="text" class="form-control" id="provinsi" name="provinsi" autocomplete="off" required>
+                                    <input type="text" class="form-control" id="provinsi" name="provinsi" value="<?= $place['prov'] ?>" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="kodepos">Kode Pos</label>
-                                    <input type="text" class="form-control" id="kodepos" name="kodepos" autocomplete="off" required>
+                                    <input type="text" class="form-control" id="kodepos" name="kodepos" value="<?= $place['kodepos'] ?>" autocomplete="off" required>
                                 </div>
                             </div>
                         </div>

@@ -130,7 +130,7 @@
                                 <tr>
                                     <td width="240">2. Alamat Tujuan Pindah</td>
                                     <td>:</td>
-                                    <td>12 Januari 2020</td>
+                                    <td><?= $detail['alamat_tujuan'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width="240">3. Klasifikasi Pindah</td>
@@ -187,12 +187,11 @@
 
                 <table style="margin-top:100px;">
                     <tr>
-                        <td width="439" align="center"></td>
+                        <td width="439" align="center">Pemohon,</td>
                         <td width="439" align="center">Karawang, <?= tanggal_indonesia($detail['tanggal_surat']) ?></td>
                     </tr>
                     <tr>
                         <td width="439" align="center">
-                            Pemohon, <br>
                             Nomor: <?= $detail['no_surat'] ?>
                         </td>
                         <td width="439" align="center" style="vertical-align: top;">Lurah <?= $detaildesa['kel']; ?></td>

@@ -784,7 +784,7 @@ class Main extends BaseController
 
         $nik = $fetchAnggota['nik'];
 
-        $fetchPindah = $this->db->query("SELECT * FROM pindah_anggota WHERE nik='$nik'");
+        $fetchPindah = $this->db->query("SELECT * FROM pindah_anggota WHERE pindah_id=$idPindah AND nik='$nik'");
 
         if (!$fetchPindah->getRowArray()) {
             $data = [
