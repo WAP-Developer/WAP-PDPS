@@ -52,7 +52,7 @@ $('#html5-extension').DataTable({
 // Proses Add Employe
 
 $("form[id='formAddEmploye']").submit(function () {
-    var nip = $('#nip').val();
+    var nip = $('#nip').val().length;
 
     if (nip != 18) {
         const toast = swal.mixin({

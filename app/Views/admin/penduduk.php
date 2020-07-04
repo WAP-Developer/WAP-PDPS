@@ -27,6 +27,7 @@
                             </div>
                         </div>
                     </div>
+                    <button class="btn btn-primary" id="exportPenduduk">Excel</button>
                     <div class="table-responsive mb-4 mt-4">
                         <table id="zero-config" class="table table-hover" style="width:100%">
                             <thead>
@@ -65,7 +66,7 @@
             <!-- modal Detail -->
             <?php foreach ($dataPenduduk as $dp) : ?>
                 <div class="modal fade modal-opt" id="pendudukDetail<?= $dp['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="detail" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="detail">Detail Penduduk</h5>
@@ -154,7 +155,8 @@
                                                         <th>Nama</th>
                                                         <th>JK</th>
                                                         <th>TTL</th>
-                                                        <th>Status Hubungan</th>
+                                                        <th>HDK</th>
+                                                        <th>Status Warga</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -171,6 +173,7 @@
                                                             <td><?= $a['jk'] ?></td>
                                                             <td><?= $a['tempat_lahir'] . ', ' . date('d-m-Y', strtotime($a['tanggal_lahir'])) ?></td>
                                                             <td><?= $a['hubungan'] ?></td>
+                                                            <td><?= $a['status'] ?></td>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>

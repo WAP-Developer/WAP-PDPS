@@ -2,6 +2,10 @@ $(document).ready(function () {
     setTimeout(function () {
         $('.preloader').fadeOut();
     }, 800);
+
+    $("#exportPenduduk").click(function () {
+        location.replace("./main/exportPenduduk");
+    });
 })
 
 $('#zero-config').DataTable({

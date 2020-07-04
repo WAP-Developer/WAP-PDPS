@@ -37,7 +37,13 @@ function loadTable(data) {
                     <td>` + data[i].nama + `</td>
                     <td>` + data[i].jk + `</td>
                     <td>` + data[i].hubungan + `</td>
-                    <td class="text-center"><button class="btn btn-info btn-sm" onclick="choosePeople(` + data[i].id + `)">Pilih</button></td>
+                    <td class="text-center">`;
+        if (data[i].status == '-') {
+            html += `<button class="btn btn-info btn-sm" onclick="choosePeople(` + data[i].id + `)">Pilih</button>`;
+        } else {
+            html += `<button class="btn btn-danger btn-sm">` + data[i].status + `</button>`;
+        }
+        html += `</td>
                 </tr>`;
     }
     $('.nokk').html(data[1].nokk);
@@ -124,11 +130,15 @@ function loadTableChoose(data) {
                     <td>` + data[i].nama + `</td>
                     <td>` + data[i].jk + `</td>
                     <td>` + data[i].hubungan + `</td>
-                    <td class="text-center">
-                        <label class="new-control new-checkbox new-checkbox-rounded checkbox-primary">
+                    <td class="text-center">`;
+        if (data[i].status == '-') {
+            html += `<label class="new-control new-checkbox new-checkbox-rounded checkbox-primary">
                         <input type="checkbox" class="new-control-input checkAnggota" data-anggota="` + data[i].id + `">
-                        </label>
-                    </td>
+                        </label>`;
+        } else {
+            html += `<button class="btn btn-danger btn-sm">` + data[i].status + `</button>`;
+        }
+        html += `</td>                        
                 </tr>`;
     }
     $('.nokk').html(data[1].nokk);

@@ -208,6 +208,11 @@ $("form[id='formAddAnggota']").submit(function () {
                     text: 'Gagal! NIK Sudah Terdaftar.',
                     pos: 'bottom-center'
                 });
+            } else if (aksi == 'lessNik') {
+                Snackbar.show({
+                    text: 'Gagal! NIK Kurang dari 18 Angka.',
+                    pos: 'bottom-center'
+                });
             }
         }
     });

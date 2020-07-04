@@ -109,6 +109,71 @@ class Main extends BaseController
         echo view('admin/penduduk', $data);
     }
 
+    public function exportPenduduk()
+    {
+        $getAnggota = $this->anggota->getJoinAnggota();
+        $html = '<table>
+            <tr>
+                <th>No KK</td>
+                <th>Kepala KK</td>
+                <th>Alamat</td>
+                <th>Desa</td>
+                <th>Kecamatan</td>
+                <th>Kabupaten</td>
+                <th>Provinsi</td>
+                <th>Kode POS</td>
+                <th>NIK</td>
+                <th>Nama</td>
+                <th>Jenis Kelamin</td>
+                <th>TTL</td>
+                <th>Agama</td>
+                <th>Pendidikan</td>
+                <th>Pekerjaan</td>
+                <th>Golongan Darah</td>
+                <th>Status Nikah</td>
+                <th>Hubungan Dalam Keluarga</td>
+                <th>Kewarganegaraan</td>
+                <th>Paspor</td>
+                <th>KITAP</td>
+                <th>Ayah</td>
+                <th>Ibu</td>
+                <th>Status</td>
+            </tr>';
+        foreach ($getAnggota as $a) {
+            $html .= '
+            <tr>
+                <td><b>' . $a['nokk'] . '</b></td>                
+                <td>' . $a['kepalakk'] . '</td>                
+                <td>' . $a['alamat'] . ' RT/RW.' . $a['rtrw'] . '</td>           
+                <td>' . $a['desa'] . '</td>                
+                <td>' . $a['kecamatan'] . '</td>                
+                <td>' . $a['kabupaten'] . '</td>                
+                <td>' . $a['provinsi'] . '</td>                
+                <td>' . $a['kodepos'] . '</td>                
+                <td><b>' . $a['nik'] . '</b></td>                
+                <td><b>' . $a['nama'] . '</b></td>                
+                <td>' . $a['jk'] . '</td>                
+                <td>' . $a['tempat_lahir'] . ', ' . $a['tanggal_lahir'] . '</td>                
+                <td>' . $a['agama'] . '</td>                
+                <td>' . $a['pendidikan'] . '</td>                
+                <td>' . $a['pekerjaan'] . '</td>                
+                <td>' . $a['golongan_darah'] . '</td>                
+                <td>' . $a['status_nikah'] . '</td>              
+                <td>' . $a['hubungan'] . '</td>                
+                <td>' . $a['kewarganegaraan'] . '</td>                
+                <td>' . $a['paspor'] . '</td>                
+                <td>' . $a['kitap'] . '</td>                
+                <td>' . $a['ayah'] . '</td>                
+                <td>' . $a['ibu'] . '</td>                
+                <td>' . $a['status'] . '</td>                
+            </tr>';
+        }
+        $html .= '</table>';
+        header('Content-Type:application/xls');
+        header('Content-Disposition:attachment;filename=reportPenduduk.xls');
+        echo $html;
+    }
+
     public function deletePendudukProcess()
     {
         $id = $this->request->getPost('id');
@@ -209,33 +274,37 @@ class Main extends BaseController
         $ayah = $this->request->getPost('ayah');
         $ibu = $this->request->getPost('ibu');
 
-        $data = [
-            'kk_id' => $kkid,
-            'nama' => $nama,
-            'nik' => $nik,
-            'jk' => $jk,
-            'tempat_lahir' => $tempatlahir,
-            'tanggal_lahir' => $tanggallahir,
-            'agama' => $agama,
-            'pendidikan' => $pendidikan,
-            'pekerjaan' => $pekerjaan,
-            'golongan_darah' => $goldarah,
-            'status_nikah' => $statuskawin,
-            'tgl_nikah' => $tglkawin,
-            'hubungan' => $hubungan,
-            'kewarganegaraan' => $kewarganegaraan,
-            'paspor' => $paspor,
-            'kitap' => $kitap,
-            'ayah' => $ayah,
-            'ibu' => $ibu
-        ];
+        if (strlen($nik) == 16) {
+            $data = [
+                'kk_id' => $kkid,
+                'nama' => $nama,
+                'nik' => $nik,
+                'jk' => $jk,
+                'tempat_lahir' => $tempatlahir,
+                'tanggal_lahir' => $tanggallahir,
+                'agama' => $agama,
+                'pendidikan' => $pendidikan,
+                'pekerjaan' => $pekerjaan,
+                'golongan_darah' => $goldarah,
+                'status_nikah' => $statuskawin,
+                'tgl_nikah' => $tglkawin,
+                'hubungan' => $hubungan,
+                'kewarganegaraan' => $kewarganegaraan,
+                'paspor' => $paspor,
+                'kitap' => $kitap,
+                'ayah' => $ayah,
+                'ibu' => $ibu
+            ];
 
-        $checkNIK = $this->anggota->where('nik', $nik)->first();
-        if (!$checkNIK) {
-            $this->anggota->insert($data);
-            echo 'success';
+            $checkNIK = $this->anggota->where('nik', $nik)->first();
+            if (!$checkNIK) {
+                $this->anggota->insert($data);
+                echo 'success';
+            } else {
+                echo "failed";
+            }
         } else {
-            echo "failed";
+            echo "lessNik";
         }
     }
 
@@ -669,6 +738,13 @@ class Main extends BaseController
             $kematianDB = $this->db->table("kematian");
             $kematianDB->insert($data);
 
+            $anggotaData = [
+                'status' => 'Meninggal',
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+
+            $this->anggota->update($idMeninggal, $anggotaData);
+
             $fetchKematian = $this->db->query("SELECT * FROM kematian WHERE no_surat='$nosurat'");
             $kematian = $fetchKematian->getRowArray();
 
@@ -798,9 +874,26 @@ class Main extends BaseController
 
             $insertPindahDB = $this->db->table("pindah_anggota");
             $insertPindahDB->insert($data);
+
+            $anggotaData = [
+                'status' => 'Pindah',
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+
+            $replaceAnggota = $this->db->table('anggota_kk');
+            $replaceAnggota->where('nik', $fetchAnggota['nik']);
+            $replaceAnggota->update($anggotaData);
         } else {
             $deletePindahDB = $this->db->table("pindah_anggota");
             $deletePindahDB->delete(['nik' => $nik]);
+            $anggotaData = [
+                'status' => '-',
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+
+            $replaceAnggota = $this->db->table('anggota_kk');
+            $replaceAnggota->where('nik', $fetchAnggota['nik']);
+            $replaceAnggota->update($anggotaData);
         }
     }
 

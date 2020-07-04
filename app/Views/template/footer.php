@@ -4,7 +4,6 @@
 <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
 <script src="<?= base_url('assets/admin'); ?>/assets/js/libs/jquery-3.1.1.min.js"></script>
 <script src="<?= base_url('assets/admin'); ?>/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="<?= base_url('assets/admin'); ?>/bootstrap/js/popper.min.js"></script>
 <script src="<?= base_url('assets/admin'); ?>/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?= base_url('assets/admin'); ?>/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>

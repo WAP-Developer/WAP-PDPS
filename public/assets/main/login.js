@@ -41,7 +41,7 @@ function checkValidation() {
 }
 
 function loginCheck() {
-    var nip = $('#formNip').val();
+    var nip = $('#formNip').val().length;
 
     if (nip != 18) {
         var type = "error";

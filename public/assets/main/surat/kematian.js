@@ -40,8 +40,14 @@ function loadTable(data) {
                     <td>` + data[i].nama + `</td>
                     <td>` + data[i].jk + `</td>
                     <td>` + data[i].hubungan + `</td>
-                    <td class="text-center"><button class="btn btn-info btn-sm" onclick="choosePeople(` + data[i].id + `)">Pilih</button></td>
-                </tr>`;
+                    <td class="text-center">`;
+        if (data[i].status == '-') {
+            html += `<button class="btn btn-info btn-sm" onclick="choosePeople(` + data[i].id + `)">Pilih</button>`;
+        } else {
+            html += `<button class="btn btn-danger btn-sm">` + data[i].status + `</button>`;
+        }
+        html += `</td>
+                    </tr>`;
     }
     $('.nokkPelapor').html(data[1].nokk);
     $('.kepalakkPelapor').html(data[1].kepalakk);
@@ -122,7 +128,13 @@ function loadTableMeninggal(data) {
                     <td>` + data[i].nama + `</td>
                     <td>` + data[i].jk + `</td>
                     <td>` + data[i].hubungan + `</td>
-                    <td class="text-center"><button class="btn btn-info btn-sm" onclick="chooseMeninggal(` + data[i].id + `)">Pilih</button></td>
+                    <td class="text-center">`;
+        if (data[i].status == '-') {
+            html += `<button class="btn btn-info btn-sm" onclick="chooseMeninggal(` + data[i].id + `)">Pilih</button>`;
+        } else {
+            html += `<button class="btn btn-danger btn-sm">` + data[i].status + `</button>`;
+        }
+        html += `</td>
                 </tr>`;
         $('.nokkMeninggal').html(data[1].nokk);
         $('.kepalakkMeninggal').html(data[1].kepalakk);
